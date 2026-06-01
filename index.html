@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apurva Crypto - Community, Content & Care</title>
-<meta name="description" content="Web3 community manager, moderator & ambassador. 4+ years across 20+ projects.">
+<title>Apurva Crypto - Community, Content &amp; Care</title>
+<meta name="description" content="Web3 community manager, moderator &amp; ambassador. 4+ years across 20+ projects.">
 
 <!-- ⚠️ EDIT: update URL + image once deployed so link previews work in Telegram/Twitter/Discord -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Apurva Crypto - Web3 Community, Content & Care">
-<meta property="og:description" content="Community manager, moderator & ambassador. 4+ years across 20+ Web3 projects. Discord & Telegram ops, AMAs, threads, ghostwriting.">
+<meta property="og:title" content="Apurva Crypto - Web3 Community, Content &amp; Care">
+<meta property="og:description" content="Community manager, moderator &amp; ambassador. 4+ years across 20+ Web3 projects. Discord &amp; Telegram ops, AMAs, threads, ghostwriting.">
 <meta property="og:url" content="https://apurvacrypto.example/">
 <meta property="og:image" content="https://apurvacrypto.example/PFP.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Apurva Crypto - Web3 Community, Content & Care">
-<meta name="twitter:description" content="Community manager, moderator & ambassador. 4+ years across 20+ Web3 projects.">
+<meta name="twitter:title" content="Apurva Crypto - Web3 Community, Content &amp; Care">
+<meta name="twitter:description" content="Community manager, moderator &amp; ambassador. 4+ years across 20+ Web3 projects.">
 <meta name="twitter:image" content="https://apurvacrypto.example/">
 <meta name="twitter:creator" content="@apurvajain24">
 
@@ -673,130 +673,159 @@ a.role-tag:hover {
   transform: translate(-1px, -1px);
 }
 
-/* ============ EXPERIENCE ============ */
-.exp-list { display: flex; flex-direction: column; }
+/* ============ EXPERIENCE — tabs + paginated ============ */
+.tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
+.tab-btn {
+  padding:9px 18px; border:1.5px solid var(--ink); border-radius:100px;
+  font-family:'JetBrains Mono', monospace; font-size:12px; text-transform:uppercase;
+  letter-spacing:0.06em; font-weight:500; cursor:pointer; background:var(--paper);
+  box-shadow:2px 2px 0 var(--ink); transition:all 0.15s; user-select:none; color:var(--ink);
+}
+.tab-btn:hover { transform:translate(-1px,-1px); box-shadow:3px 3px 0 var(--ink); }
+.tab-btn.active { background:var(--raspberry); color:var(--paper); border-color:var(--raspberry); }
+
+.exp-list {
+  display:flex;
+  flex-direction:column;
+  border-top:1px solid rgba(31,26,20,0.18);
+}
 
 .exp-row {
-  display: grid;
-  grid-template-columns: 130px 1fr 240px;
-  gap: 24px;
-  padding: 24px 0;
-  border-top: 1.5px solid var(--ink);
-  align-items: start;
-  position: relative;
-  transition: background 0.2s, padding 0.2s;
-}
-.exp-row:last-child { border-bottom: 1.5px solid var(--ink); }
-.exp-row:hover {
-  background: var(--paper-2);
-  padding-left: 16px;
-  padding-right: 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+  padding:16px 0;
+  border-bottom:1px solid rgba(31,26,20,0.18);
+  text-decoration:none; color:inherit;
+  transition:background 0.18s, padding 0.18s;
+  animation:fadeRowIn 0.3s ease both;
 }
 
+a.exp-row:hover {
+  background:var(--paper-2);
+  padding-left:14px;
+  padding-right:14px;
+  border-radius:10px;
+}
+a.exp-row:hover .exp-name { color:var(--raspberry); }
+a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
+
+@keyframes fadeRowIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+
+.exp-main {
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  flex:1;
+  min-width:0;
+}
+
+.exp-top {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:nowrap;
+}
 .exp-year {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--marigold);
-  padding-top: 4px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11.5px;
+  font-weight:500;
+  color:var(--marigold);
+  letter-spacing:0.03em;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.exp-sep {
+  color:var(--ink-faint);
+  font-size:11px;
+}
+.exp-name {
+  font-family:'Fraunces', serif;
+  font-size:19px;
+  font-weight:500;
+  letter-spacing:-0.01em;
+  font-variation-settings:"SOFT" 50, "opsz" 96;
+  transition:color 0.18s;
+  white-space:nowrap;
+}
+.x-link {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:20px; height:20px;
+  border:1.5px solid var(--ink);
+  border-radius:5px;
+  background:var(--paper);
+  color:var(--ink);
+  flex-shrink:0;
+  transition:background 0.18s, color 0.18s, transform 0.18s, box-shadow 0.18s;
+}
+.x-link svg { width:10px; height:10px; display:block; }
+.x-link:hover {
+  background:var(--ink);
+  color:var(--paper);
+  transform:translate(-1px,-1px);
+  box-shadow:2px 2px 0 var(--raspberry);
+}
+.exp-followers {
+  font-family:'JetBrains Mono', monospace;
+  font-size:10.5px;
+  color:var(--ink-faint);
+  white-space:nowrap;
 }
 
-.exp-main h4 {
-  font-family: 'Fraunces', serif;
-  font-size: 24px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-  margin-bottom: 6px;
-  font-variation-settings: "SOFT" 50, "opsz" 96;
+.exp-desc {
+  font-size:13.5px;
+  color:var(--ink-soft);
+  line-height:1.45;
+  max-width:70ch;
 }
-.exp-main p { color: var(--ink-soft); font-size: 15px; max-width: 56ch; }
 
+.exp-roles-wrap {
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+}
 .exp-role {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  background: var(--paper);
-  border: 1.5px solid var(--ink);
-  border-radius: 100px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 500;
-  margin-left: auto;
+  padding:4px 11px;
+  background:var(--paper);
+  border:1.5px solid var(--ink);
+  border-radius:100px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  font-weight:500;
+  white-space:nowrap;
 }
-.exp-role.cm { background: var(--butter); }
-.exp-role.mod { background: var(--sky); }
-.exp-role.amb { background: var(--sage); }
+.exp-role.cm  { background:var(--butter); }
+.exp-role.mod { background:var(--sky); }
+.exp-role.amb { background:var(--sage); }
+.exp-role.gw  { background:var(--lilac); }
 
-.exp-roles-wrap { display: flex; justify-content: flex-end; }
-
-@media (max-width: 800px) {
-  .exp-row { grid-template-columns: 1fr; gap: 8px; }
-  .exp-roles-wrap { justify-content: flex-start; }
-  .exp-role { margin-left: 0; }
+@media (max-width:640px) {
+  .exp-row { flex-direction:column; gap:6px; }
+  .exp-roles-wrap { padding-top:0; }
 }
 
-/* Linked experience rows (whole row is clickable) */
-a.exp-row {
-  text-decoration: none;
-  color: inherit;
+.exp-controls {
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:28px;
 }
-a.exp-row:hover h4 { color: var(--raspberry); }
-a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper); border-color: var(--raspberry); }
-
-.exp-main h4 {
-  display: inline-flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  transition: color 0.2s;
+.show-more-btn {
+  display:inline-flex; align-items:center; gap:10px; padding:13px 22px;
+  font-family:'JetBrains Mono', monospace; font-size:13px; text-transform:uppercase;
+  letter-spacing:0.08em; font-weight:500; border:1.5px solid var(--ink);
+  background:var(--butter); color:var(--ink); border-radius:100px;
+  box-shadow:3px 3px 0 var(--ink); cursor:pointer; transition:transform 0.18s, box-shadow 0.18s;
 }
-
-.exp-handle {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 3px 9px;
-  background: var(--paper);
-  border: 1.5px solid var(--ink);
-  border-radius: 100px;
-  text-transform: lowercase;
-  transition: all 0.2s;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-
-.exp-tagline {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-size: 15px;
-  color: var(--ink-soft);
-  margin-bottom: 6px;
-  font-variation-settings: "SOFT" 80, "opsz" 36;
-  max-width: 56ch;
-}
-.exp-tagline::before { content: '“ '; color: var(--raspberry); }
-.exp-tagline::after { content: ' ”'; color: var(--raspberry); }
-
-.exp-doing {
-  font-size: 14.5px;
-  color: var(--ink-soft);
-  max-width: 56ch;
-}
-
-/* Multiple role tags */
-.exp-roles-wrap.multi {
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-}
-@media (max-width: 800px) {
-  .exp-roles-wrap.multi { align-items: flex-start; }
-}
+.show-more-btn:hover { transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--ink); }
+.show-more-btn.secondary { background:var(--paper); }
+.exp-counter { font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--ink-faint); letter-spacing:0.06em; }
+.exp-counter b { color:var(--ink); }
+.page-dots { display:flex; gap:6px; }
+.page-dot { width:8px; height:8px; border-radius:50%; border:1.5px solid var(--ink); background:transparent; transition:background 0.2s; }
+.page-dot.active { background:var(--raspberry); border-color:var(--raspberry); }
 
 /* ============ HIGHLIGHTS / TWEETS ============ */
 .highlights-intro {
@@ -949,7 +978,7 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
   line-height: 1.5;
   font-variation-settings: "SOFT" 80, "opsz" 36;
 }
-.irl-quote::before { content: '"'; font-size: 36px; line-height: 0; vertical-align: -10px; margin-right: 4px; color: var(--raspberry); }
+.irl-quote::before { content: '\201C'; font-size: 36px; line-height: 0; vertical-align: -10px; margin-right: 4px; color: var(--raspberry); }
 
 .irl-feature-tweet {
   background: var(--paper);
@@ -1310,7 +1339,6 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
 .reveal.in { opacity: 1; transform: translateY(0); }
 
 /* ============ TWEET CARD FALLBACK / SKELETON ============ */
-/* Keeps the layout intentional even if X's widget is slow or fails to load */
 .tweet-card {
   position: relative;
   min-height: 180px;
@@ -1330,7 +1358,6 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
   color: var(--ink);
   z-index: 0;
 }
-/* When the widget renders its iframe, hide the fallback behind it */
 .tweet-card iframe { position: relative; z-index: 2; background: var(--paper); }
 .tweet-card .tweet-fallback .tf-label {
   font-family: 'JetBrains Mono', monospace;
@@ -1395,42 +1422,10 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
   letter-spacing: -0.01em; margin-bottom: 20px;
   font-variation-settings: "SOFT" 40, "opsz" 60;
 }
-.tmt-card .tmt-quote::before { content: '“'; color: var(--raspberry); font-size: 1.2em; }
-.tmt-card .tmt-quote::after { content: '”'; color: var(--raspberry); }
+.tmt-card .tmt-quote::before { content: '\201C'; color: var(--raspberry); font-size: 1.2em; }
+.tmt-card .tmt-quote::after { content: '\201D'; color: var(--raspberry); }
 .tmt-card .tmt-who { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; }
 .tmt-card .tmt-role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-soft); margin-top: 3px; }
-
-/* ============ EXPERIENCE SUBHEADINGS ============ */
-.exp-subhead {
-  display: flex; align-items: center; gap: 12px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em;
-  color: var(--ink); font-weight: 600;
-  margin: 40px 0 4px;
-}
-.exp-subhead:first-child { margin-top: 0; }
-.exp-subhead .es-tag {
-  padding: 3px 10px; border: 1.5px solid var(--ink); border-radius: 100px;
-  background: var(--marigold); font-size: 10.5px;
-}
-.exp-subhead .es-note { color: var(--ink-soft); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 12px; }
-
-/* Collapsed "also worked with" list */
-.also-worked {
-  margin-top: 36px; padding: 24px; border: 1.5px dashed var(--ink);
-  border-radius: 16px; background: var(--paper-2);
-}
-.also-worked summary {
-  font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
-  cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em;
-}
-.also-worked .aw-list {
-  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;
-}
-.also-worked .aw-tag {
-  padding: 5px 12px; background: var(--paper); border: 1.5px solid var(--ink);
-  border-radius: 100px; font-size: 13px; font-weight: 500;
-}
 
 </style>
 </head>
@@ -1439,7 +1434,7 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
 <header class="header">
   <div class="logo">Apurva <em>Crypto</em></div>
   <input type="checkbox" class="nav-toggle" id="nav-toggle">
-  <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle menu">☰</label>
+  <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle menu">&#9776;</label>
   <nav>
     <a href="#work">Work</a>
     <a href="#experience">Experience</a>
@@ -1479,11 +1474,11 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
     <div class="hero-cta">
       <a href="#contact" class="btn primary">
         <span>Let's work together</span>
-        <span class="arrow">→</span>
+        <span class="arrow">&#8594;</span>
       </a>
       <a href="#experience" class="btn">
         <span>See my work</span>
-        <span class="arrow">↓</span>
+        <span class="arrow">&#8595;</span>
       </a>
     </div>
   </div>
@@ -1493,7 +1488,7 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
     <div class="hero-name">Apurva <em>Crypto</em></div>
     <div class="hero-locale">
       <span>GMT +5:30</span>
-      <span class="sep">✦</span>
+      <span class="sep">&#10022;</span>
       <span>Full-time</span>
     </div>
 
@@ -1535,12 +1530,12 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
     <div class="stat-sticker">
       <div class="stat-num">1.8<small>M</small></div>
       <div class="stat-label">Twitter impressions</div>
-      <div class="stat-trend">↑ 513% • last 3 mo</div>
+      <div class="stat-trend">&#8593; 513% &bull; last 3 mo</div>
     </div>
     <div class="stat-sticker">
       <div class="stat-num">15<small>K+</small></div>
       <div class="stat-label">Quora followers</div>
-      <div class="stat-trend">3.8M+ views on Qoura</div>
+      <div class="stat-trend">3.8M+ views on Quora</div>
     </div>
     <div class="stat-sticker">
       <div class="stat-num">8.5<small>K+</small></div>
@@ -1555,19 +1550,13 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
     <div class="stat-sticker">
       <div class="stat-num">20<small>+</small></div>
       <div class="stat-label">Web3 projects worked with</div>
-      <div class="stat-trend">community · mod · ambassador</div>
+      <div class="stat-trend">community &middot; mod &middot; ambassador</div>
     </div>
     <div class="stat-sticker">
       <div class="stat-num">4<small>+ yrs</small></div>
       <div class="stat-label">In the trenches</div>
       <div class="stat-trend">since 2021</div>
     </div>
-
-    <!-- ============================================================= -->
-    <!-- ⚠️ OPERATIONAL METRICS BELOW ARE SAMPLE / PLACEHOLDER NUMBERS  -->
-    <!-- Replace each with your REAL figures before publishing.        -->
-    <!-- These are the metrics crypto hirers care about most.          -->
-    <!-- ============================================================= -->
     <div class="stat-sticker">
       <div class="stat-num">&lt;5<small>min</small></div>
       <div class="stat-label">Avg first-response time</div>
@@ -1583,58 +1572,57 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
       <div class="stat-label">Avg community growth</div>
       <div class="stat-trend">per campaign cycle</div>
     </div>
-    <!-- ============= END SAMPLE METRICS ============================ -->
   </div>
 </section>
 
 <!-- ========== MARQUEE ========== -->
 <div class="marquee">
   <div class="marquee-track">
-    <span>Somnia <span class="star">✦</span></span>
-    <span>Galxe <span class="star">✦</span></span>
-    <span>Arbitrum <span class="star">✦</span></span>
-    <span>Capx AI <span class="star">✦</span></span>
-    <span>zkPass <span class="star">✦</span></span>
-    <span>Polyhedra <span class="star">✦</span></span>
-    <span>Nomina <span class="star">✦</span></span>
-    <span>Burnt XION <span class="star">✦</span></span>
-    <span>Sei Network <span class="star">✦</span></span>
-    <span>Supra Labs <span class="star">✦</span></span>
-    <span>0G Labs <span class="star">✦</span></span>
-    <span>Sova Labs <span class="star">✦</span></span>
-    <span>Fuse Network <span class="star">✦</span></span>
-    <span>Blazpay <span class="star">✦</span></span>
-    <span>Hydro Protocol <span class="star">✦</span></span>
-    <span>KiloEx <span class="star">✦</span></span>
-    <span>Primex <span class="star">✦</span></span>
-    <span>Combo <span class="star">✦</span></span>
-    <span>Ryze <span class="star">✦</span></span>
-    <span>Agni Finance <span class="star">✦</span></span>
-    <span>AIRian <span class="star">✦</span></span>
-    <span>Melon NFT <span class="star">✦</span></span>
+    <span>Somnia <span class="star">&#10022;</span></span>
+    <span>Galxe <span class="star">&#10022;</span></span>
+    <span>Arbitrum <span class="star">&#10022;</span></span>
+    <span>Capx AI <span class="star">&#10022;</span></span>
+    <span>zkPass <span class="star">&#10022;</span></span>
+    <span>Polyhedra <span class="star">&#10022;</span></span>
+    <span>Nomina <span class="star">&#10022;</span></span>
+    <span>Burnt XION <span class="star">&#10022;</span></span>
+    <span>Sei Network <span class="star">&#10022;</span></span>
+    <span>Supra Labs <span class="star">&#10022;</span></span>
+    <span>0G Labs <span class="star">&#10022;</span></span>
+    <span>Sova Labs <span class="star">&#10022;</span></span>
+    <span>Fuse Network <span class="star">&#10022;</span></span>
+    <span>Blazpay <span class="star">&#10022;</span></span>
+    <span>Hydro Protocol <span class="star">&#10022;</span></span>
+    <span>KiloEx <span class="star">&#10022;</span></span>
+    <span>Primex <span class="star">&#10022;</span></span>
+    <span>Combo <span class="star">&#10022;</span></span>
+    <span>Ryze <span class="star">&#10022;</span></span>
+    <span>Agni Finance <span class="star">&#10022;</span></span>
+    <span>AIRian <span class="star">&#10022;</span></span>
+    <span>Melon NFT <span class="star">&#10022;</span></span>
     <!-- duplicate for seamless loop -->
-    <span>Somnia <span class="star">✦</span></span>
-    <span>Galxe <span class="star">✦</span></span>
-    <span>Arbitrum <span class="star">✦</span></span>
-    <span>Capx AI <span class="star">✦</span></span>
-    <span>zkPass <span class="star">✦</span></span>
-    <span>Polyhedra <span class="star">✦</span></span>
-    <span>Nomina <span class="star">✦</span></span>
-    <span>Burnt XION <span class="star">✦</span></span>
-    <span>Sei Network <span class="star">✦</span></span>
-    <span>Supra Labs <span class="star">✦</span></span>
-    <span>0G Labs <span class="star">✦</span></span>
-    <span>Sova Labs <span class="star">✦</span></span>
-    <span>Fuse Network <span class="star">✦</span></span>
-    <span>Blazpay <span class="star">✦</span></span>
-    <span>Hydro Protocol <span class="star">✦</span></span>
-    <span>KiloEx <span class="star">✦</span></span>
-    <span>Primex <span class="star">✦</span></span>
-    <span>Combo <span class="star">✦</span></span>
-    <span>Ryze <span class="star">✦</span></span>
-    <span>Agni Finance <span class="star">✦</span></span>
-    <span>AIRian <span class="star">✦</span></span>
-    <span>Melon NFT <span class="star">✦</span></span>
+    <span>Somnia <span class="star">&#10022;</span></span>
+    <span>Galxe <span class="star">&#10022;</span></span>
+    <span>Arbitrum <span class="star">&#10022;</span></span>
+    <span>Capx AI <span class="star">&#10022;</span></span>
+    <span>zkPass <span class="star">&#10022;</span></span>
+    <span>Polyhedra <span class="star">&#10022;</span></span>
+    <span>Nomina <span class="star">&#10022;</span></span>
+    <span>Burnt XION <span class="star">&#10022;</span></span>
+    <span>Sei Network <span class="star">&#10022;</span></span>
+    <span>Supra Labs <span class="star">&#10022;</span></span>
+    <span>0G Labs <span class="star">&#10022;</span></span>
+    <span>Sova Labs <span class="star">&#10022;</span></span>
+    <span>Fuse Network <span class="star">&#10022;</span></span>
+    <span>Blazpay <span class="star">&#10022;</span></span>
+    <span>Hydro Protocol <span class="star">&#10022;</span></span>
+    <span>KiloEx <span class="star">&#10022;</span></span>
+    <span>Primex <span class="star">&#10022;</span></span>
+    <span>Combo <span class="star">&#10022;</span></span>
+    <span>Ryze <span class="star">&#10022;</span></span>
+    <span>Agni Finance <span class="star">&#10022;</span></span>
+    <span>AIRian <span class="star">&#10022;</span></span>
+    <span>Melon NFT <span class="star">&#10022;</span></span>
   </div>
 </div>
 
@@ -1721,214 +1709,23 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
     <span class="num"> 02</span>
     <h2>Experience</h2>
   </div>
-  <h3 class="section-title">Selected roles, <em>by depth</em>.</h3>
+  <h3 class="section-title">Selected roles, <em>by role</em>.</h3>
 
-  <div class="exp-list">
+  <div class="tabs" id="tabs">
+    <button class="tab-btn active" data-role="all">All</button>
+    <button class="tab-btn" data-role="cm">Community Manager</button>
+    <button class="tab-btn" data-role="mod">Moderator</button>
+    <button class="tab-btn" data-role="amb">Ambassador</button>
+    <button class="tab-btn" data-role="gw">Ghostwriter</button>
+  </div>
 
-    <div class="exp-subhead">
-      <span class="es-tag">Core</span>
-      <span>Paid moderation &amp; community management</span>
-      <span class="es-note">hands on the server, daily.</span>
-    </div>
+  <div class="exp-list" id="expList"></div>
 
-    <a href="https://x.com/SovaBTC" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2025 Now</div>
-      <div class="exp-main">
-        <h4>Sova Labs <span class="exp-handle">@SovaBTC ↗</span></h4>
-        <p class="exp-tagline">Earn yield on Bitcoin, swap to native BTC &amp; ZEC, 23+ chains, built on @NEAR_Intents.</p>
-        <p class="exp-doing">Discord &amp; Telegram moderation for the BTC-yield community.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role mod">Moderator</span></div>
-    </a>
-
-    <a href="https://x.com/Somnia_Network" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2020 - 22</div>
-      <div class="exp-main">
-        <h4>Somnia Network <span class="exp-handle">@Somnia_Network ↗</span></h4>
-        <p class="exp-tagline">The Agentic L1, fastest (1M+ TPS) and most cost-efficient EVM L1 blockchain with Multistream Consensus.</p>
-        <p class="exp-doing">Managed discussions and resolved tickets on Discord &amp; Telegram. Ran community events. My longest-running mod role.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role mod">Moderator</span></div>
-    </a>
-
-    <a href="https://x.com/Galxe" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2023 - 24</div>
-      <div class="exp-main">
-        <h4>Galxe <span class="exp-handle">@Galxe ↗</span></h4>
-        <p class="exp-tagline">The leading Web3 growth platform, home to GalxeQuest &amp; GalxePassport, powered by GravityChain.</p>
-        <p class="exp-doing">Discord &amp; Telegram moderation. Resolved issues, fostered positive interactions in a community of 1.5M followers.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role mod">Moderator</span></div>
-    </a>
-
-    <a href="https://x.com/Nomina" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2023 - 24</div>
-      <div class="exp-main">
-        <h4>Nomina <span class="exp-handle">@Nomina ↗</span></h4>
-        <p class="exp-tagline">Power tools for onchain markets, building the first unified trading platform. (Formerly Omni Network / Omni Protocol.)</p>
-        <p class="exp-doing">Moderated Discord &amp; Telegram, handled tickets, then expanded to ambassador work, content, regional community, campaigns.</p>
-      </div>
-      <div class="exp-roles-wrap multi">
-        <span class="exp-role mod">Moderator</span>
-        <span class="exp-role amb">Ambassador</span>
-      </div>
-    </a>
-
-    <a href="https://x.com/hydro_fi" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2023 - 24</div>
-      <div class="exp-main">
-        <h4>Hydro Protocol <span class="exp-handle">@hydro_fi ↗</span></h4>
-        <p class="exp-tagline">The ultimate Injective-native LST + LSTFi Protocol, maximize yield with LSTs and Real-Yielding Assets.</p>
-        <p class="exp-doing">Ran Galxe &amp; Intract campaigns for onboarding. Managed Telegram &amp; Discord, integrated bots, hosted AMAs.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role cm">Community Mgr</span></div>
-    </a>
-
-    <a href="https://x.com/air_airofficial" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2023 - 24</div>
-      <div class="exp-main">
-        <h4>AIRian <span class="exp-handle">@air_airofficial ↗</span></h4>
-        <p class="exp-tagline">Building the world's largest running community, Sport AI &amp; DePIN on $AIR, driving mass adoption.</p>
-        <p class="exp-doing">Built interactive campaigns on QuestN &amp; TaskOn. Set up Telegram &amp; Discord with moderation bots. Organized events.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role cm">Community Mgr</span></div>
-    </a>
-
-    <a href="https://x.com/0xCapx" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2022 - 23</div>
-      <div class="exp-main">
-        <h4>Capx AI <span class="exp-handle">@0xCapx ↗</span></h4>
-        <p class="exp-tagline">The People's Nasdaq for AI Apps, Ethereum Layer 2 for AI app tokenization and instant trade settlements.</p>
-        <p class="exp-doing">Built the Web3 community via Zealy &amp; TaskOn campaigns. Optimized Discord with bots and anti-spam. Launched educational content.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role cm">Community Mgr</span></div>
-    </a>
-
-    <a href="https://x.com/zkPass" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2023 - 24</div>
-      <div class="exp-main">
-        <h4>zkPass <span class="exp-handle">@zkPass ↗</span></h4>
-        <p class="exp-tagline">Making web data verifiable for humans and AI agents. Governed by zkPassDAO &amp; $ZKP.</p>
-        <p class="exp-doing">Guided members and resolved issues on Discord &amp; Telegram. Boosted engagement through proactive support.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role mod">Moderator</span></div>
-    </a>
-
-    <a href="https://x.com/burnt_xion" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2023 - 24</div>
-      <div class="exp-main">
-        <h4>Burnt XION <span class="exp-handle">@burnt_xion ↗</span></h4>
-        <p class="exp-tagline">The Trust Layer for the internet, verified data turned into programmable value. Leveraged by 150+ brands including Uber. Backed by Multicoin, Circle.</p>
-        <p class="exp-doing">Resolved tickets and supported community engagement on Discord &amp; Telegram.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role mod">Moderator</span></div>
-    </a>
-
-    <div class="exp-row">
-      <div class="exp-year">2022 - 23</div>
-      <div class="exp-main">
-        <h4>Polyhedra Network</h4>
-        <p class="exp-doing">Moderated Discord and Telegram. Resolved queries and tickets, maintained engagement through community events.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role mod">Moderator</span></div>
-    </div>
-
-    <a href="https://x.com/blazpaylabs" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2021 - 22</div>
-      <div class="exp-main">
-        <h4>Blazpay <span class="exp-handle">@blazpaylabs ↗</span></h4>
-        <p class="exp-tagline">Comprehensive AI &amp; DeFi platform - BlazHub rewards, finance, on-chain engagement.</p>
-        <p class="exp-doing">Resolved issues and supported users on Discord &amp; Telegram. Held the line during launch periods.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role mod">Moderator</span></div>
-    </a>
-
-    <div class="exp-subhead">
-      <span class="es-tag">Ambassador</span>
-      <span>Program &amp; content roles</span>
-      <span class="es-note">- writing, regional growth, AMAs.</span>
-    </div>
-
-    <a href="https://x.com/arbitrum" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2025 - Now</div>
-      <div class="exp-main">
-        <h4>Arbitrum <span class="exp-handle">@arbitrum ↗</span></h4>
-        <p class="exp-tagline">Powering the programmable economy.</p>
-        <p class="exp-doing">Ambassador work - content, regional growth, ecosystem engagement.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role amb">Ambassador</span></div>
-    </a>
-
-    <a href="https://x.com/SUPRA_Labs" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2024</div>
-      <div class="exp-main">
-        <h4>Supra Labs <span class="exp-handle">@SUPRA_Labs ↗</span></h4>
-        <p class="exp-tagline">The first all-in-one MultiVM Layer 1 built for Super dApps, MoveVM mainnet live.</p>
-        <p class="exp-doing">Created articles, managed community interactions, ran campaigns to boost engagement.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role amb">Ambassador</span></div>
-    </a>
-
-    <a href="https://x.com/0G_labs" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2024</div>
-      <div class="exp-main">
-        <h4>0G Labs <span class="exp-handle">@0G_labs ↗</span></h4>
-        <p class="exp-tagline">Blockchain for AI Agents, Home of Infinite AI.</p>
-        <p class="exp-doing">Simplified the project's positioning through content, built regional community, launched long-term engagement activities.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role amb">Ambassador</span></div>
-    </a>
-
-    <a href="https://x.com/SeiNetwork" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2022 - 23</div>
-      <div class="exp-main">
-        <h4>Sei Network <span class="exp-handle">@SeiNetwork ↗</span></h4>
-        <p class="exp-tagline">The Blockchain for Trading, infrastructure for the modern economy.</p>
-        <p class="exp-doing">Created content on Medium &amp; Twitter, built regional community with local language support, organized engagement activities.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role amb">Ambassador</span></div>
-    </a>
-
-    <a href="https://x.com/KiloEx_perp" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2022 - 23</div>
-      <div class="exp-main">
-        <h4>KiloEx Finance <span class="exp-handle">@KiloEx_perp ↗</span></h4>
-        <p class="exp-tagline">Next-gen user-friendly perpetual DEX on BNB Chain / opBNB / Base / Manta. Backed by Binance Labs, Foresight Ventures, Manta.</p>
-        <p class="exp-doing">Created educational content, organized activities to boost participation, supported regional community in native languages.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role amb">Ambassador</span></div>
-    </a>
-
-    <a href="https://x.com/primex_official" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2022 - 23</div>
-      <div class="exp-main">
-        <h4>Primex Finance <span class="exp-handle">@primex_official ↗</span></h4>
-        <p class="exp-tagline">Most Friendly DeFi App, building on EVM and Monad.</p>
-        <p class="exp-doing">Created content on Medium &amp; Twitter, supported regional community, designed campaigns to attract users.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role amb">Ambassador</span></div>
-    </a>
-
-    <a href="https://x.com/Fuse_network" target="_blank" rel="noopener" class="exp-row">
-      <div class="exp-year">2021 - 22</div>
-      <div class="exp-main">
-        <h4>Fuse Network <span class="exp-handle">@Fuse_network ↗</span></h4>
-        <p class="exp-tagline">Real-world crypto payments since 2019 - AI commerce, stablecoin rails &amp; agentic payments for merchants worldwide.</p>
-        <p class="exp-doing">Grew regional community, educated users with accessible content, hosted events to maintain engagement.</p>
-      </div>
-      <div class="exp-roles-wrap"><span class="exp-role amb">Ambassador</span></div>
-    </a>
-
-    <details class="also-worked">
-      <summary>＋ Also worked with (earlier / shorter engagements)</summary>
-      <div class="aw-list">
-        <span class="aw-tag">Melon NFT - CM</span>
-        <a href="https://x.com/Agnidex" target="_blank" rel="noopener" class="aw-tag" style="text-decoration:none;color:inherit;">Agni Finance - Ambassador ↗</a>
-        <span class="aw-tag">Combo Network - Ambassador</span>
-        <span class="aw-tag">Ryze Finance - Ambassador</span>
-      </div>
-    </details>
-
+  <div class="exp-controls">
+    <button class="show-more-btn" id="nextBtn"><span id="nextLabel">Show next 5 &#8594;</span></button>
+    <button class="show-more-btn secondary" id="resetBtn" style="display:none;">Back to start &#8593;</button>
+    <div class="page-dots" id="pageDots"></div>
+    <span class="exp-counter">Showing <b id="cShown">1&#8211;5</b> of <b id="cTotal">26</b></span>
   </div>
 </section>
 
@@ -1942,16 +1739,16 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
 
   <div class="irl-feature">
     <div>
-      <div class="feat-label"> COMMUNITY EVENT · 2026</div>
+      <div class="feat-label"> COMMUNITY EVENT &middot; 2026</div>
       <h3>I bring crypto <em>off the screen</em>.</h3>
-      <p>Beyond Discord channels and , I gather Web3 communities <strong>in real life</strong>, organizing meetups, panels, and city-level builder gatherings. Showing up matters more than scaling.</p>
+      <p>Beyond Discord channels, I gather Web3 communities <strong>in real life</strong>, organizing meetups, panels, and city-level builder gatherings. Showing up matters more than scaling.</p>
       <p style="opacity: 0.9;">Recently held. More cities, soon. The energy of being in the same room as people who are actually building, that doesn't translate online.</p>
     </div>
     <div class="irl-feature-tweet">
       <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
         <a href="https://twitter.com/apurvajain24/status/2058245757602549855"></a>
       </blockquote>
-      <a href="https://x.com/apurvajain24/status/2058245757602549855" target="_blank" rel="noopener" style="display:inline-block;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--raspberry);text-decoration:none;">View the meetup post on Twitter ↗</a>
+      <a href="https://x.com/apurvajain24/status/2058245757602549855" target="_blank" rel="noopener" style="display:inline-block;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--raspberry);text-decoration:none;">View the meetup post on Twitter &#8599;</a>
     </div>
   </div>
 </section>
@@ -1968,32 +1765,21 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
   <span class="slider-hint">FEATURED SPACES</span>
 
   <div class="slider-wrap">
-    <button class="slider-btn prev" aria-label="Previous space">←</button>
-    <button class="slider-btn next" aria-label="Next space">→</button>
+    <button class="slider-btn prev" aria-label="Previous space">&#8592;</button>
+    <button class="slider-btn next" aria-label="Next space">&#8594;</button>
     <div class="tweets-grid">
       <div class="tweet-card">
-  <a href="https://x.com/apurvajain24/status/1893980135705170252"
-     target="_blank"
-     rel="noopener">
-
-    <img
-      src="assets/Indian AMA Card.png"
-      alt="0G Labs AMA"
-      style="
-        width:100%;
-        height:auto;
-        border-radius:12px;
-        display:block;
-      ">
-  </a>
-</div>
+        <a href="https://x.com/apurvajain24/status/1893980135705170252" target="_blank" rel="noopener">
+          <img src="assets/Indian AMA Card.png" alt="0G Labs AMA" style="width:100%;height:auto;border-radius:12px;display:block;">
+        </a>
+      </div>
       <div class="tweet-card">
         <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
           <a href="https://x.com/apurvajain24/status/1905324974577254514"></a>
         </blockquote>
         <a class="tweet-fallback" href="https://x.com/apurvajain24/status/1905324974577254514" target="_blank" rel="noopener">
           <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
+          <span class="tf-cta">View on Twitter &#8599;</span>
         </a>
       </div>
       <div class="tweet-card">
@@ -2002,7 +1788,7 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
         </blockquote>
         <a class="tweet-fallback" href="https://x.com/apurvajain24/status/1839263716011028834" target="_blank" rel="noopener">
           <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
+          <span class="tf-cta">View on Twitter &#8599;</span>
         </a>
       </div>
       <div class="tweet-card">
@@ -2011,7 +1797,7 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
         </blockquote>
         <a class="tweet-fallback" href="https://x.com/apurvajain24/status/1914721291979858025" target="_blank" rel="noopener">
           <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
+          <span class="tf-cta">View on Twitter &#8599;</span>
         </a>
       </div>
     </div>
@@ -2030,40 +1816,37 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
   <div class="writing-grid">
 
     <a href="https://www.quora.com/profile/Apurva-Jain-161" target="_blank" rel="noopener" class="writing-card feat">
-      <div class="w-platform"><span>Quora · profile</span><span>↗</span></div>
+      <div class="w-platform"><span>Quora &middot; profile</span><span>&#8599;</span></div>
       <div class="w-title">15K+ followers, 3.5M+ views</div>
       <div class="w-desc">My longest-running writing home - crypto explainers, project breakdowns, and answers that consistently rank. The clearest proof I can hold an audience.</div>
     </a>
 
-    <!-- ⚠️ EDIT: swap in the URL of your single best Twitter thread -->
     <a href="https://x.com/apurvajain24" target="_blank" rel="noopener" class="writing-card">
-      <div class="w-platform"><span>Twitter · thread</span><span>↗</span></div>
+      <div class="w-platform"><span>Twitter &middot; thread</span><span>&#8599;</span></div>
       <div class="w-title">Research breakdown thread</div>
       <div class="w-desc">A deep-dive thread on a project I worked with - structure, hook, payoff. Replace this card's link with the thread you're proudest of.</div>
     </a>
 
-    <!-- ⚠️ EDIT: add your real Medium URL, or delete this card if unused -->
     <a href="https://medium.com/@apurvajain" target="_blank" rel="noopener" class="writing-card">
-      <div class="w-platform"><span>Medium · article</span><span>↗</span></div>
+      <div class="w-platform"><span>Medium &middot; article</span><span>&#8599;</span></div>
       <div class="w-title">Long-form project article</div>
       <div class="w-desc">Ambassador articles written to onboard regional users. Point this at your best Medium piece (or remove if you don't use Medium).</div>
     </a>
 
     <a href="https://www.linkedin.com/company/convergence-summit/posts/?feedView=all" target="_blank" rel="noopener" class="writing-card">
-      <div class="w-platform"><span>Ghostwritten · LinkedIn</span><span>↗</span></div>
+      <div class="w-platform"><span>Ghostwritten &middot; LinkedIn</span><span>&#8599;</span></div>
       <div class="w-title">Convergence Summit - speaker &amp; partner posts</div>
       <div class="w-desc">Voice sample (with permission): announcement posts written in a strict house style, sourced quotes only. Invisible on the byline, careful on the page.</div>
     </a>
 
     <a href="https://x.com/Vault__Summit" target="_blank" rel="noopener" class="writing-card">
-      <div class="w-platform"><span>Ghostwritten · Twitter</span><span>↗</span></div>
+      <div class="w-platform"><span>Ghostwritten &middot; Twitter</span><span>&#8599;</span></div>
       <div class="w-title">Vault Summit - event voice</div>
       <div class="w-desc">Ongoing X copy for a summit account: tone matched, schedule-driven, on-brand. Ghostwriting is invisible by design, so these are shared as voice references.</div>
     </a>
 
-    <!-- ⚠️ EDIT: optional - add a YouTube/video link if you want to show that format -->
     <a href="https://x.com/apurvajain24" target="_blank" rel="noopener" class="writing-card">
-      <div class="w-platform"><span>Twitter · opinion take</span><span>↗</span></div>
+      <div class="w-platform"><span>Twitter &middot; opinion take</span><span>&#8599;</span></div>
       <div class="w-title">A take that found its audience</div>
       <div class="w-desc">Opinion posts on launches and TGE timing. Swap in a post that shows your point of view, not just reach.</div>
     </a>
@@ -2080,119 +1863,59 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
   <h3 class="section-title">Threads &amp; posts I'm <em>proud of</em>.</h3>
   <p class="highlights-intro">A selection of recent work - research breakdowns, opinion takes, and threads that found their audience.</p>
 
-  <span class="slider-hint">← swipe / 12 posts →</span>
+  <span class="slider-hint">&#8592; swipe / 12 posts &#8594;</span>
 
   <div class="slider-wrap">
-    <button class="slider-btn prev" aria-label="Previous post">←</button>
-    <button class="slider-btn next" aria-label="Next post">→</button>
+    <button class="slider-btn prev" aria-label="Previous post">&#8592;</button>
+    <button class="slider-btn next" aria-label="Next post">&#8594;</button>
     <div class="tweets-grid">
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2038142942150574163"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2038142942150574163" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2038142942150574163"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2038142942150574163" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2026170542609588675"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2026170542609588675" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2026170542609588675"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2026170542609588675" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2022973318018859493"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2022973318018859493" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2022973318018859493"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2022973318018859493" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2020201471946662191"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2020201471946662191" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2020201471946662191"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2020201471946662191" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2018808036815691976"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2018808036815691976" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2018808036815691976"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2018808036815691976" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2016815595258597743"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2016815595258597743" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2016815595258597743"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2016815595258597743" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2015874864016719920"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2015874864016719920" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2015874864016719920"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2015874864016719920" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2015398820692287821"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2015398820692287821" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2015398820692287821"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2015398820692287821" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2014997337987538980"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2014997337987538980" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2014997337987538980"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2014997337987538980" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2014205747924705477"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2014205747924705477" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2014205747924705477"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2014205747924705477" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2012406526108139607"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2012406526108139607" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2012406526108139607"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2012406526108139607" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
       <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://twitter.com/apurvajain24/status/2010259083803373710"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2010259083803373710" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter ↗</span>
-        </a>
+        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://twitter.com/apurvajain24/status/2010259083803373710"></a></blockquote>
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2010259083803373710" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
       </div>
     </div>
   </div>
@@ -2205,33 +1928,24 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
     <h2>What people say</h2>
   </div>
   <h3 class="section-title">Trust is the whole <em>currency</em>.</h3>
-  <p class="highlights-intro">In crypto, a reference from someone you worked with beats any stat. Drop in real quotes from project leads or teammates — even two or three changes everything.</p>
+  <p class="highlights-intro">In crypto, a reference from someone you worked with beats any stat. Drop in real quotes from project leads or teammates &mdash; even two or three changes everything.</p>
 
-  <!-- ============================================================= -->
-  <!-- ⚠️ PLACEHOLDER TESTIMONIALS — replace with REAL quotes.        -->
-  <!-- Ask 2-3 founders/leads you worked with (Somnia, Galxe, etc.)  -->
-  <!-- for one line + their name & @handle. Remove any you can't fill.-->
-  <!-- ============================================================= -->
   <div class="tmt-grid">
-
     <div class="tmt-card">
       <div class="tmt-quote">Apurva held our Discord together through launch week. Fast, calm, and never missed a scam attempt.</div>
-      <div class="tmt-who">— [Name], [Project]</div>
-      <div class="tmt-role">[Role] · @[handle]</div>
+      <div class="tmt-who">&mdash; [Name], [Project]</div>
+      <div class="tmt-role">[Role] &middot; @[handle]</div>
     </div>
-
     <div class="tmt-card">
       <div class="tmt-quote">One of the few mods who actually understands the product, not just the rules. Our regional community grew because of the content.</div>
-      <div class="tmt-who">— [Name], [Project]</div>
-      <div class="tmt-role">[Role] · @[handle]</div>
+      <div class="tmt-who">&mdash; [Name], [Project]</div>
+      <div class="tmt-role">[Role] &middot; @[handle]</div>
     </div>
-
     <div class="tmt-card">
       <div class="tmt-quote">Reliable, low-drama, and writes in our voice better than we do. Easy to recommend.</div>
-      <div class="tmt-who">— [Name], [Project]</div>
-      <div class="tmt-role">[Role] · @[handle]</div>
+      <div class="tmt-who">&mdash; [Name], [Project]</div>
+      <div class="tmt-role">[Role] &middot; @[handle]</div>
     </div>
-
   </div>
 </section>
 
@@ -2244,7 +1958,6 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
   <h3 class="section-title">What I bring to the <em>server</em>.</h3>
 
   <div class="skills-grid">
-
     <div class="skill-block">
       <h4>Campaign <em>platforms</em></h4>
       <div class="skill-tags">
@@ -2255,7 +1968,6 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
         <span class="skill-tag">QuestN</span>
       </div>
     </div>
-
     <div class="skill-block">
       <h4>Community <em>channels</em></h4>
       <div class="skill-tags">
@@ -2264,7 +1976,6 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
         <span class="skill-tag">Twitter / X</span>
       </div>
     </div>
-
     <div class="skill-block">
       <h4>Discord <em>ops</em></h4>
       <div class="skill-tags">
@@ -2275,7 +1986,6 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
         <span class="skill-tag">Role design</span>
       </div>
     </div>
-
     <div class="skill-block">
       <h4>Content <em>formats</em></h4>
       <div class="skill-tags">
@@ -2286,7 +1996,6 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
         <span class="skill-tag">Medium</span>
       </div>
     </div>
-
     <div class="skill-block">
       <h4>Events &amp; <em>hosting</em></h4>
       <div class="skill-tags">
@@ -2296,7 +2005,6 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
         <span class="skill-tag">IRL meetups</span>
       </div>
     </div>
-
     <div class="skill-block">
       <h4>Languages I <em>write in</em></h4>
       <div class="skill-tags">
@@ -2304,7 +2012,6 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
         <span class="skill-tag">Hindi</span>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -2325,11 +2032,11 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
     <div class="contact-grid">
       <a href="https://t.me/jain_apurva24" target="_blank" rel="noopener" class="contact-card">
         <div class="contact-label">Telegram (fastest)</div>
-        <div class="contact-handle">@jain_apurva24 ↗</div>
+        <div class="contact-handle">@jain_apurva24 &#8599;</div>
       </a>
       <a href="https://x.com/apurvajain24" target="_blank" rel="noopener" class="contact-card">
         <div class="contact-label">Twitter</div>
-        <div class="contact-handle">@apurvajain24 ↗</div>
+        <div class="contact-handle">@apurvajain24 &#8599;</div>
       </a>
       <span class="contact-card" style="cursor:default;">
         <div class="contact-label">Discord</div>
@@ -2337,37 +2044,30 @@ a.exp-row:hover .exp-handle { background: var(--raspberry); color: var(--paper);
       </span>
       <a href="https://www.linkedin.com/in/jainapurva24" target="_blank" rel="noopener" class="contact-card">
         <div class="contact-label">LinkedIn</div>
-        <div class="contact-handle">/in/jainapurva24 ↗</div>
+        <div class="contact-handle">/in/jainapurva24 &#8599;</div>
       </a>
       <a href="https://www.quora.com/profile/Apurva-Jain-161" target="_blank" rel="noopener" class="contact-card">
         <div class="contact-label">Quora</div>
-        <div class="contact-handle">/Apurva-Jain-161 ↗</div>
+        <div class="contact-handle">/Apurva-Jain-161 &#8599;</div>
       </a>
       <a href="mailto:jainapurva24032003@gmail.com" class="contact-card">
         <div class="contact-label">Email</div>
-        <div class="contact-handle">say hi ↗</div>
+        <div class="contact-handle">say hi &#8599;</div>
       </a>
-      <!-- ⚠️ EDIT: link a 1-page CV (PDF) or a public Notion profile, then unhide -->
-      <!--
-      <a href="REPLACE_WITH_CV_OR_NOTION_LINK" target="_blank" rel="noopener" class="contact-card">
-        <div class="contact-label">Résumé / Notion</div>
-        <div class="contact-handle">view CV ↗</div>
-      </a>
-      -->
     </div>
   </div>
 </section>
 
 <footer class="footer">
-  <div>© 2026 Apurva Crypto · Built with care <span class="heart">♥</span></div>
-  <div>Made with care · v.1.0</div>
+  <div>&copy; 2026 Apurva Crypto &middot; Built with care <span class="heart">&#9829;</span></div>
+  <div>Made with care &middot; v.1.0</div>
 </footer>
 
-<!-- Twitter widget script (renders all .twitter-tweet blockquotes) -->
+<!-- Twitter widget script -->
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <script>
-// Scroll reveal
+// ============ SCROLL REVEAL ============
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -2379,7 +2079,7 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Slider navigation
+// ============ SLIDER NAVIGATION ============
 document.querySelectorAll('.slider-wrap').forEach(wrap => {
   const grid = wrap.querySelector('.tweets-grid');
   const prev = wrap.querySelector('.slider-btn.prev');
@@ -2389,6 +2089,197 @@ document.querySelectorAll('.slider-wrap').forEach(wrap => {
   prev.addEventListener('click', () => grid.scrollBy({ left: -step(), behavior: 'smooth' }));
   next.addEventListener('click', () => grid.scrollBy({ left: step(),  behavior: 'smooth' }));
 });
+
+// ============ EXPERIENCE — TABS + PAGINATION ============
+const ROLES = { cm:'Community Manager', mod:'Moderator', amb:'Ambassador', gw:'Ghostwriter' };
+
+const DATA = [
+  { name:'Galxe', url:'https://x.com/Galxe', foll:'1.5M', yr:'2023-24', role:'mod',
+    tagline:'The leading Web3 growth platform, home to GalxeQuest and GalxePassport.',
+    doing:'Discord and Telegram moderation in a community of 1.5M followers.' },
+  { name:'Arbitrum', url:'https://x.com/arbitrum', foll:'1.1M', yr:'2025-Now', role:'amb',
+    tagline:'Powering the programmable economy.',
+    doing:'Ambassador work, content, regional growth, ecosystem engagement.' },
+  { name:'Sei Network', url:'https://x.com/SeiNetwork', foll:'772K', yr:'2022-23', role:'amb',
+    tagline:'The Blockchain for Trading, infrastructure for the modern economy.',
+    doing:'Content on Medium and Twitter, regional community, engagement activities.' },
+  { name:'0G Labs', url:'https://x.com/0G_labs', foll:'717K', yr:'2024', role:'amb',
+    tagline:'Blockchain for AI Agents, Home of Infinite AI.',
+    doing:'Positioning through content, regional community, long-term engagement.' },
+  { name:'Nomina', url:'https://x.com/Nomina', foll:'508K', yr:'2023-24', role:'mod',
+    tagline:'Power tools for onchain markets. (Formerly Omni Network.)',
+    doing:'Moderation plus ambassador work, content, community, campaigns.' },
+  { name:'Somnia Network', url:'https://x.com/Somnia_Network', foll:'438K', yr:'2020-22', role:'mod',
+    tagline:'The Agentic L1, fastest 1M+ TPS EVM L1 with Multistream Consensus.',
+    doing:'Discussions, tickets, community events. My longest-running mod role.' },
+  { name:'Blazpay', url:'https://x.com/blazpaylabs', foll:'355K', yr:'2021-22', role:'mod',
+    tagline:'Comprehensive AI and DeFi platform, BlazHub rewards and on-chain engagement.',
+    doing:'Support on Discord and Telegram. Held the line during launch periods.' },
+  { name:'zkPass', url:'https://x.com/zkPass', foll:'352K', yr:'2023-24', role:'mod',
+    tagline:'Making web data verifiable for humans and AI agents.',
+    doing:'Guided members and resolved issues. Boosted engagement.' },
+  { name:'Supra Labs', url:'https://x.com/SUPRA_Labs', foll:'313K', yr:'2024', role:'amb',
+    tagline:'The first all-in-one MultiVM Layer 1 built for Super dApps.',
+    doing:'Created articles, managed community interactions, ran campaigns.' },
+  { name:'KiloEx Finance', url:'https://x.com/KiloEx_perp', foll:'226K', yr:'2022-23', role:'amb',
+    tagline:'User-friendly perpetual DEX on BNB Chain, opBNB, Base, Manta.',
+    doing:'Educational content, activities, regional community in native languages.' },
+  { name:'Capx AI', url:'https://x.com/0xCapx', foll:'124K', yr:'2022-23', role:'cm',
+    tagline:'The People\u2019s Nasdaq for AI Apps, Ethereum Layer 2 for AI app tokenization.',
+    doing:'Built community via Zealy and TaskOn. Discord bots, anti-spam, education.' },
+  { name:'Fuse Network', url:'https://x.com/Fuse_network', foll:'109K', yr:'2021-22', role:'amb',
+    tagline:'Real-world crypto payments since 2019.',
+    doing:'Regional community, accessible content, events.' },
+  { name:'House of Chimera', url:'https://x.com/HouseofChimera', foll:'48K', yr:'2025', role:'gw',
+    tagline:'Blockchain research and advisory group focused on startups.',
+    doing:'Ghostwritten threads and research-style posts in their house voice.' },
+  { name:'AIRian', url:'https://x.com/air_airofficial', foll:'37K', yr:'2023-24', role:'cm',
+    tagline:'Building the world\u2019s largest running community, Sport AI and DePIN.',
+    doing:'Campaigns on QuestN and TaskOn. Discord bots. Events.' },
+  { name:'Burnt XION', url:'https://x.com/burnt_xion', foll:'', yr:'2023-24', role:'mod',
+    tagline:'The Trust Layer for the internet. Leveraged by 150+ brands including Uber.',
+    doing:'Resolved tickets, supported community engagement.' },
+  { name:'Hydro Protocol', url:'https://x.com/hydro_fi', foll:'', yr:'2023-24', role:'cm',
+    tagline:'Injective-native LST and LSTFi Protocol.',
+    doing:'Galxe and Intract campaigns, Discord, bots, AMAs.' },
+  { name:'Primex Finance', url:'https://x.com/primex_official', foll:'', yr:'2022-23', role:'amb',
+    tagline:'Most Friendly DeFi App, building on EVM and Monad.',
+    doing:'Content on Medium and Twitter, regional community, campaigns.' },
+  { name:'Vault Summit', url:'https://x.com/Vault__Summit', foll:'', yr:'2026', role:'gw',
+    tagline:'Institutional DeFi strategies summit.',
+    doing:'Ghostwritten event copy: tone matched, schedule-driven, on-brand.' },
+  { name:'Convergence Summit', url:'https://x.com/_ConvergenceAI', foll:'', yr:'2026', role:'gw',
+    tagline:'A day of unfiltered conversations on how AI is showing up across industries.',
+    doing:'Speaker and partner announcement posts, strict house style, sourced quotes.' },
+  { name:'Bennie', url:'https://x.com/benhwx', foll:'8.8K', yr:'2025', role:'gw',
+    tagline:'Internet capital markets, Asia GTM.',
+    doing:'Ghostwritten posts matched to a personal founder voice.' },
+  { name:'Sova Labs', url:'https://x.com/SovaBTC', foll:'7K', yr:'2025-Now', role:'mod',
+    tagline:'Earn yield on Bitcoin, swap to native BTC and ZEC.',
+    doing:'Discord and Telegram moderation for the BTC-yield community.' },
+  { name:'Polyhedra Network', url:'', foll:'', yr:'2022-23', role:'mod',
+    tagline:'',
+    doing:'Moderated Discord and Telegram, resolved queries and tickets.' },
+  { name:'Combo Network', url:'', foll:'', yr:'2022-23', role:'amb',
+    tagline:'',
+    doing:'Content for Mirror and YouTube, regional community support.' },
+  { name:'Ryze Finance', url:'', foll:'', yr:'2022-23', role:'amb',
+    tagline:'',
+    doing:'Articles and videos, regional community, engagement activities.' },
+  { name:'Agni Finance', url:'https://x.com/Agnidex', foll:'27K', yr:'2021-22', role:'amb',
+    tagline:'High-capital-efficiency AMM DEX and Launchpad on Mantle.',
+    doing:'Feature explainers, regional community, engagement activities.' },
+  { name:'Melon NFT', url:'', foll:'', yr:'2021-22', role:'cm',
+    tagline:'A marketplace to turn viral memes into NFTs.',
+    doing:'Grew Twitter, Telegram, Discord. Discord bots, Galxe campaigns, AMAs.' },
+];
+
+const PER_PAGE = 5;
+let currentRole = 'all';
+let page = 0;
+let hasInteracted = false;
+
+const listEl    = document.getElementById('expList');
+const tabsEl    = document.getElementById('tabs');
+const nextBtn   = document.getElementById('nextBtn');
+const nextLabel = document.getElementById('nextLabel');
+const resetBtn  = document.getElementById('resetBtn');
+const cShown    = document.getElementById('cShown');
+const cTotal    = document.getElementById('cTotal');
+const pageDots  = document.getElementById('pageDots');
+
+function filtered() {
+  return currentRole === 'all' ? DATA : DATA.filter(d => d.role === currentRole);
+}
+
+function rowHTML(item) {
+  const xIcon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
+  const xBtn = item.url
+    ? '<span class="x-link" aria-hidden="true">' + xIcon + '</span>'
+    : '';
+  const foll = item.foll ? '<span class="exp-followers">' + item.foll + '</span>' : '';
+  const descParts = [item.tagline, item.doing].filter(Boolean);
+  const desc = descParts.length ? '<p class="exp-desc">' + descParts.join(' \u2014 ') + '</p>' : '';
+
+  const inner =
+    '<div class="exp-main">' +
+      '<div class="exp-top">' +
+        '<span class="exp-year">' + item.yr + '</span>' +
+        '<span class="exp-sep">\u00b7</span>' +
+        '<span class="exp-name">' + item.name + '</span>' +
+        xBtn + foll +
+      '</div>' +
+      desc +
+    '</div>' +
+    '<div class="exp-roles-wrap"><span class="exp-role ' + item.role + '">' + ROLES[item.role] + '</span></div>';
+
+  return item.url
+    ? '<a class="exp-row" href="' + item.url + '" target="_blank" rel="noopener">' + inner + '</a>'
+    : '<div class="exp-row">' + inner + '</div>';
+}
+
+function buildDots(totalPages) {
+  pageDots.innerHTML = '';
+  for (let i = 0; i < totalPages; i++) {
+    const d = document.createElement('span');
+    d.className = 'page-dot' + (i === page ? ' active' : '');
+    pageDots.appendChild(d);
+  }
+}
+
+function render() {
+  const list = filtered();
+  const total = list.length;
+  const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
+  if (page >= totalPages) page = 0;
+
+  const start = page * PER_PAGE;
+  const slice = list.slice(start, start + PER_PAGE);
+  listEl.innerHTML = slice.map(rowHTML).join('');
+
+  const from = total === 0 ? 0 : start + 1;
+  const to = Math.min(start + PER_PAGE, total);
+  cShown.textContent = from + '\u2013' + to;
+  cTotal.textContent = total;
+
+  buildDots(totalPages);
+
+  const multiPage = totalPages > 1;
+  nextBtn.style.display = multiPage ? 'inline-flex' : 'none';
+  pageDots.style.display = multiPage ? 'flex' : 'none';
+
+  if (page >= totalPages - 1) {
+    nextLabel.textContent = 'Start over \u2191';
+  } else {
+    const remaining = total - to;
+    nextLabel.textContent = 'Show next ' + Math.min(PER_PAGE, remaining) + ' \u2192';
+  }
+  resetBtn.style.display = (multiPage && page > 0) ? 'inline-flex' : 'none';
+
+  if (hasInteracted) listEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+tabsEl.addEventListener('click', (e) => {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  [...tabsEl.children].forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentRole = btn.dataset.role;
+  page = 0;
+  hasInteracted = false;
+  render();
+});
+
+nextBtn.addEventListener('click', () => {
+  const totalPages = Math.max(1, Math.ceil(filtered().length / PER_PAGE));
+  hasInteracted = true;
+  page = (page + 1) % totalPages;
+  render();
+});
+
+resetBtn.addEventListener('click', () => { hasInteracted = true; page = 0; render(); });
+
+render();
 </script>
 
 </body>
