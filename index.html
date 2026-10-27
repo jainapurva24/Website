@@ -4,26 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apurva Crypto - Community, Content &amp; Care</title>
-<meta name="description" content="Web3 community manager, moderator &amp; ambassador. 4+ years across 20+ projects.">
+<meta name="description" content="Web3 community manager, moderator, ambassador and ghostwriter. 4+ years across 20+ projects.">
 
-<!-- ⚠️ EDIT: update URL + image once deployed so link previews work in Telegram/Twitter/Discord -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Apurva Crypto - Web3 Community, Content &amp; Care">
-<meta property="og:description" content="Community manager, moderator &amp; ambassador. 4+ years across 20+ Web3 projects. Discord &amp; Telegram ops, AMAs, threads, ghostwriting.">
+<meta property="og:description" content="Community manager, moderator, ambassador and ghostwriter. 4+ years across 20+ Web3 projects. Discord and Telegram ops, AMAs, threads, ghostwriting.">
 <meta property="og:url" content="https://apurvacrypto.xyz/">
 <meta property="og:image" content="https://apurvacrypto.xyz/assets/PFP.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Apurva Crypto - Web3 Community, Content &amp; Care">
-<meta name="twitter:description" content="Community manager, moderator &amp; ambassador. 4+ years across 20+ Web3 projects.">
+<meta name="twitter:description" content="Community manager, moderator, ambassador and ghostwriter. 4+ years across 20+ Web3 projects.">
 <meta name="twitter:image" content="https://apurvacrypto.xyz/assets/PFP.jpg">
 <meta name="twitter:creator" content="@apurvajain24">
 
-<!-- Inline SVG favicon (no external file needed) -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23fef6e8'/%3E%3Crect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%231f1a14' stroke-width='1.5'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-style='italic' font-weight='700' fill='%23ee4266' text-anchor='middle'%3Ea%3C/text%3E%3C/svg%3E">
 
+<link rel="preload" as="image" href="assets/PFP.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..900,0..100;1,9..144,400..900,0..100&family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="dns-prefetch" href="https://platform.twitter.com">
+<link rel="dns-prefetch" href="https://syndication.twitter.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --paper:      #fef6e8;
@@ -41,7 +42,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
 
 body {
   background: var(--paper);
@@ -53,26 +54,16 @@ body {
   font-variation-settings: "opsz" 14;
 }
 
-.mono { font-family: 'JetBrains Mono', monospace; }
-.serif { font-family: 'Fraunces', Georgia, serif; }
-
-/* Paper texture overlay */
+/* Paper grain. No mix-blend-mode (that forced a full-screen repaint on every scroll frame). */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.4;
+  opacity: 0.35;
+  transform: translateZ(0);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.3 0 0 0 0 0.1 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
-}
-
-/* Halftone dot pattern utility */
-.dots-bg {
-  background-image: radial-gradient(circle, var(--ink) 1px, transparent 1.5px);
-  background-size: 14px 14px;
-  background-position: 0 0;
 }
 
 /* ============ HEADER ============ */
@@ -97,14 +88,15 @@ body::before {
   font-variation-settings: "SOFT" 100, "opsz" 144;
   letter-spacing: -0.03em;
   line-height: 1;
+  color: var(--ink);
+  text-decoration: none;
 }
 .logo em { font-style: italic; color: var(--raspberry); }
 
-.header nav { display: flex; gap: 24px; }
+.header nav { display: flex; gap: 22px; }
 .header nav a {
   color: var(--ink);
   text-decoration: none;
-  position: relative;
   transition: color 0.2s;
 }
 .header nav a:hover { color: var(--raspberry); }
@@ -151,29 +143,18 @@ body::before {
 }
 
 @media (max-width: 960px) {
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 44px;
-  }
+  .hero { grid-template-columns: 1fr; gap: 44px; min-height: auto; }
 }
 
-/* decorative shapes */
-.hero-blob {
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
-}
+.hero-blob { position: absolute; pointer-events: none; z-index: 0; }
 .hero-blob.b1 {
   top: 18%; left: 52%;
   width: 90px; height: 90px;
   background: var(--butter);
   border: 1.5px solid var(--ink);
   border-radius: 50%;
-  transform: rotate(-8deg);
   opacity: 0.6;
 }
-.hero-blob.b2 { display: none; }
-.hero-blob.b3 { display: none; }
 .hero-blob.b4 {
   bottom: 22%; left: 4%;
   width: 38px; height: 38px;
@@ -181,22 +162,9 @@ body::before {
   border: 1.5px solid var(--ink);
   border-radius: 50%;
 }
+@media (max-width: 960px) { .hero-blob.b1 { display: none; } }
 
 .hero-content { position: relative; z-index: 2; }
-
-.hero-meta {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  color: var(--ink-soft);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 32px;
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.hero-meta .dot-sep { color: var(--marigold); font-size: 14px; }
 
 .hero h1 {
   font-family: 'Fraunces', serif;
@@ -238,12 +206,7 @@ body::before {
 }
 .hero-tagline strong { color: var(--ink); font-weight: 600; }
 
-.role-pills {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 36px;
-}
+.role-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
 
 .role-pill {
   padding: 7px 14px;
@@ -256,19 +219,13 @@ body::before {
   border-radius: 100px;
   background: var(--paper);
   box-shadow: 3px 3px 0 var(--ink);
-  transition: transform 0.2s;
 }
-.role-pill:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink); }
 .role-pill.p1 { background: var(--marigold); }
 .role-pill.p2 { background: var(--sky); }
 .role-pill.p3 { background: var(--butter); }
 .role-pill.p4 { background: var(--lilac); }
 
-.hero-cta {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
 
 .btn {
   display: inline-flex;
@@ -284,7 +241,7 @@ body::before {
   background: var(--paper);
   color: var(--ink);
   border-radius: 8px;
-  transition: all 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   cursor: pointer;
   box-shadow: 3px 3px 0 var(--ink);
   font-weight: 500;
@@ -295,7 +252,7 @@ body::before {
 .btn .arrow { transition: transform 0.2s; }
 .btn:hover .arrow { transform: translateX(3px); }
 
-/* ============ HERO CARD (PFP + socials, right column) ============ */
+/* ============ HERO CARD ============ */
 .hero-card {
   position: relative;
   z-index: 2;
@@ -312,10 +269,7 @@ body::before {
   width: 100%;
   justify-self: end;
 }
-
-@media (max-width: 960px) {
-  .hero-card { justify-self: start; max-width: 100%; }
-}
+@media (max-width: 960px) { .hero-card { justify-self: start; max-width: 100%; } }
 
 .hero-pfp {
   width: 140px;
@@ -325,6 +279,7 @@ body::before {
   border: 3px solid var(--butter);
   box-shadow: 5px 5px 0 var(--ink);
   display: block;
+  background: var(--paper);
 }
 
 .hero-name {
@@ -374,12 +329,10 @@ body::before {
   letter-spacing: 0.02em;
   transition: background 0.18s, color 0.18s, transform 0.18s, box-shadow 0.18s;
   box-shadow: 2px 2px 0 var(--ink);
+  min-width: 0;
 }
-.hero-social svg {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-}
+.hero-social span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hero-social svg { width: 16px; height: 16px; flex-shrink: 0; }
 .hero-social:hover {
   background: var(--ink);
   color: var(--paper);
@@ -399,40 +352,17 @@ body::before {
   box-shadow: none;
 }
 
-.hero-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
-  width: 100%;
-  margin-top: 6px;
-  padding-top: 12px;
-  border-top: 1px dashed rgba(31, 26, 20, 0.2);
-}
-.hero-chips span {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink-soft);
-  padding: 3px 8px;
-  background: var(--paper);
-  border: 1px solid var(--ink-faint);
-  border-radius: 100px;
-}
-
-/* ============ STATS STICKERS ============ */
+/* ============ STATS ============ */
 .stats {
   padding: 80px 28px;
   background: var(--paper-2);
   border-bottom: 1.5px solid var(--ink);
   position: relative;
 }
-
 .stats::before {
   content: '';
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
+  inset: 0;
   opacity: 0.1;
   pointer-events: none;
   background-image: radial-gradient(circle, var(--ink) 1px, transparent 1.5px);
@@ -475,7 +405,7 @@ body::before {
   border-radius: 16px;
   box-shadow: 4px 4px 0 var(--ink);
   position: relative;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 .stat-sticker:hover { transform: translate(-2px, -2px) rotate(0deg) !important; box-shadow: 6px 6px 0 var(--ink); }
 
@@ -488,7 +418,6 @@ body::before {
 .stat-sticker:nth-child(7) { background: var(--sky); transform: rotate(-1deg); }
 .stat-sticker:nth-child(8) { background: var(--marigold); transform: rotate(1.2deg); }
 .stat-sticker:nth-child(9) { background: var(--butter); transform: rotate(-0.8deg); }
-.stat-sticker:nth-child(10) { background: var(--sage); transform: rotate(1deg); }
 
 .stat-num {
   font-family: 'Fraunces', serif;
@@ -499,12 +428,7 @@ body::before {
   margin-bottom: 10px;
   font-variation-settings: "SOFT" 100, "opsz" 144;
 }
-.stat-num small {
-  font-size: 0.5em;
-  font-weight: 400;
-  font-style: italic;
-  margin-left: 4px;
-}
+.stat-num small { font-size: 0.5em; font-weight: 400; font-style: italic; margin-left: 4px; }
 .stat-label {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
@@ -533,14 +457,14 @@ body::before {
   font-weight: 500;
   font-variation-settings: "SOFT" 100, "opsz" 96;
 }
+/* each span carries its own spacing so both halves are exactly equal -> no jump at loop point */
 .marquee-track {
   display: inline-flex;
-  gap: 40px;
   animation: scroll 50s linear infinite;
-  padding-left: 40px;
+  will-change: transform;
 }
-.marquee-track span { padding-right: 40px; }
-.marquee-track .star { color: var(--marigold); font-style: normal; }
+.marquee-track span { padding-right: 56px; }
+.marquee-track .star { color: var(--marigold); font-style: normal; padding: 0 0 0 16px; }
 
 @keyframes scroll {
   from { transform: translateX(0); }
@@ -573,7 +497,7 @@ body::before {
   color: var(--ink);
   font-weight: 600;
 }
-.section-eyebrow h2 { color: var(--ink); font-weight: 600; }
+.section-eyebrow h2 { color: var(--ink); font-weight: 600; font-size: inherit; }
 
 .section-title {
   font-family: 'Fraunces', serif;
@@ -587,12 +511,23 @@ body::before {
 }
 .section-title em { font-style: italic; color: var(--raspberry); }
 
+.section-intro {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink-soft);
+  max-width: 580px;
+  margin: -32px 0 44px;
+  font-variation-settings: "SOFT" 80, "opsz" 36;
+}
+
 /* ============ ROLES ============ */
 .roles {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 28px;
 }
+@media (max-width: 400px) { .roles { grid-template-columns: 1fr; } }
 
 .role-card {
   padding: 36px 28px;
@@ -601,10 +536,9 @@ body::before {
   background: var(--paper-2);
   box-shadow: 5px 5px 0 var(--ink);
   position: relative;
-  transition: transform 0.25s;
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 .role-card:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--ink); }
-
 .role-card.r1 { background: var(--butter); }
 .role-card.r2 { background: var(--sky); }
 .role-card.r3 { background: var(--sage); }
@@ -623,11 +557,12 @@ body::before {
 
 .role-card h3 {
   font-family: 'Fraunces', serif;
-  font-size: 36px;
+  font-size: 34px;
   font-weight: 600;
   letter-spacing: -0.02em;
   margin-bottom: 14px;
   line-height: 1;
+  padding-right: 40px;
   font-variation-settings: "SOFT" 80, "opsz" 144;
 }
 
@@ -635,7 +570,7 @@ body::before {
   font-size: 16px;
   color: var(--ink-soft);
   margin-bottom: 22px;
-  max-width: 32ch;
+  max-width: 34ch;
 }
 
 .role-card .role-projects {
@@ -647,11 +582,7 @@ body::before {
   margin-bottom: 8px;
   font-weight: 500;
 }
-.role-card .role-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
+.role-card .role-list { display: flex; flex-wrap: wrap; gap: 6px; }
 .role-card .role-tag {
   padding: 4px 10px;
   background: var(--paper);
@@ -660,20 +591,15 @@ body::before {
   font-size: 12px;
   font-weight: 500;
 }
-
 a.role-tag {
   text-decoration: none;
   color: var(--ink);
   display: inline-block;
   transition: background 0.15s, color 0.15s, transform 0.15s;
 }
-a.role-tag:hover {
-  background: var(--ink);
-  color: var(--paper);
-  transform: translate(-1px, -1px);
-}
+a.role-tag:hover { background: var(--ink); color: var(--paper); transform: translate(-1px, -1px); }
 
-/* ============ EXPERIENCE — tabs + paginated ============ */
+/* ============ EXPERIENCE ============ */
 .tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
 .tab-btn {
   padding:9px 18px; border:1.5px solid var(--ink); border-radius:100px;
@@ -684,11 +610,7 @@ a.role-tag:hover {
 .tab-btn:hover { transform:translate(-1px,-1px); box-shadow:3px 3px 0 var(--ink); }
 .tab-btn.active { background:var(--raspberry); color:var(--paper); border-color:var(--raspberry); }
 
-.exp-list {
-  display:flex;
-  flex-direction:column;
-  border-top:1px solid rgba(31,26,20,0.18);
-}
+.exp-list { display:flex; flex-direction:column; border-top:1px solid rgba(31,26,20,0.18); }
 
 .exp-row {
   display:flex;
@@ -701,117 +623,52 @@ a.role-tag:hover {
   transition:background 0.18s, padding 0.18s;
   animation:fadeRowIn 0.3s ease both;
 }
-
-a.exp-row:hover {
-  background:var(--paper-2);
-  padding-left:14px;
-  padding-right:14px;
-  border-radius:10px;
-}
+a.exp-row:hover { background:var(--paper-2); padding-left:14px; padding-right:14px; border-radius:10px; }
 a.exp-row:hover .exp-name { color:var(--raspberry); }
 a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 
 @keyframes fadeRowIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
 
-.exp-main {
-  display:flex;
-  flex-direction:column;
-  gap:3px;
-  flex:1;
-  min-width:0;
-}
-
-.exp-top {
-  display:flex;
-  align-items:center;
-  gap:8px;
-  flex-wrap:nowrap;
-}
+.exp-main { display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
+.exp-top { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
 .exp-year {
   font-family:'JetBrains Mono', monospace;
-  font-size:11.5px;
-  font-weight:500;
-  color:var(--marigold);
-  letter-spacing:0.03em;
-  white-space:nowrap;
-  flex-shrink:0;
+  font-size:11.5px; font-weight:500; color:var(--marigold);
+  letter-spacing:0.03em; white-space:nowrap; flex-shrink:0;
 }
-.exp-sep {
-  color:var(--ink-faint);
-  font-size:11px;
-}
+.exp-sep { color:var(--ink-faint); font-size:11px; }
 .exp-name {
   font-family:'Fraunces', serif;
-  font-size:19px;
-  font-weight:500;
-  letter-spacing:-0.01em;
+  font-size:19px; font-weight:500; letter-spacing:-0.01em;
   font-variation-settings:"SOFT" 50, "opsz" 96;
   transition:color 0.18s;
-  white-space:nowrap;
 }
 .x-link {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
+  display:inline-flex; align-items:center; justify-content:center;
   width:20px; height:20px;
-  border:1.5px solid var(--ink);
-  border-radius:5px;
-  background:var(--paper);
-  color:var(--ink);
-  flex-shrink:0;
-  transition:background 0.18s, color 0.18s, transform 0.18s, box-shadow 0.18s;
+  border:1.5px solid var(--ink); border-radius:5px;
+  background:var(--paper); color:var(--ink); flex-shrink:0;
+  transition:background 0.18s, color 0.18s;
 }
 .x-link svg { width:10px; height:10px; display:block; }
-.x-link:hover {
-  background:var(--ink);
-  color:var(--paper);
-  transform:translate(-1px,-1px);
-  box-shadow:2px 2px 0 var(--raspberry);
-}
-.exp-followers {
-  font-family:'JetBrains Mono', monospace;
-  font-size:10.5px;
-  color:var(--ink-faint);
-  white-space:nowrap;
-}
+.exp-followers { font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--ink-faint); white-space:nowrap; }
+.exp-desc { font-size:13.5px; color:var(--ink-soft); line-height:1.45; max-width:70ch; }
 
-.exp-desc {
-  font-size:13.5px;
-  color:var(--ink-soft);
-  line-height:1.45;
-  max-width:70ch;
-}
-
-.exp-roles-wrap {
-  display:flex;
-  align-items:center;
-  flex-shrink:0;
-}
+.exp-roles-wrap { display:flex; align-items:center; flex-shrink:0; }
 .exp-role {
-  padding:4px 11px;
-  background:var(--paper);
-  border:1.5px solid var(--ink);
-  border-radius:100px;
-  font-family:'JetBrains Mono', monospace;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:0.06em;
-  font-weight:500;
-  white-space:nowrap;
+  padding:4px 11px; background:var(--paper);
+  border:1.5px solid var(--ink); border-radius:100px;
+  font-family:'JetBrains Mono', monospace; font-size:10px;
+  text-transform:uppercase; letter-spacing:0.06em; font-weight:500; white-space:nowrap;
 }
 .exp-role.cm  { background:var(--butter); }
 .exp-role.mod { background:var(--sky); }
 .exp-role.amb { background:var(--sage); }
 .exp-role.gw  { background:var(--lilac); }
 
-@media (max-width:640px) {
-  .exp-row { flex-direction:column; gap:6px; }
-  .exp-roles-wrap { padding-top:0; }
-}
+@media (max-width:640px) { .exp-row { flex-direction:column; gap:6px; } }
 
-.exp-controls {
-  display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:28px;
-}
+.exp-controls { display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:28px; }
 .show-more-btn {
   display:inline-flex; align-items:center; gap:10px; padding:13px 22px;
   font-family:'JetBrains Mono', monospace; font-size:13px; text-transform:uppercase;
@@ -827,21 +684,8 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 .page-dot { width:8px; height:8px; border-radius:50%; border:1.5px solid var(--ink); background:transparent; transition:background 0.2s; }
 .page-dot.active { background:var(--raspberry); border-color:var(--raspberry); }
 
-/* ============ HIGHLIGHTS / TWEETS ============ */
-.highlights-intro {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-size: 18px;
-  color: var(--ink-soft);
-  max-width: 580px;
-  margin-bottom: 44px;
-  font-variation-settings: "SOFT" 80, "opsz" 36;
-}
-
-.slider-wrap {
-  position: relative;
-  margin: 0 -28px;
-}
+/* ============ X POST SLIDERS ============ */
+.slider-wrap { position: relative; margin: 0 -28px; }
 
 .slider-hint {
   font-family: 'JetBrains Mono', monospace;
@@ -850,7 +694,6 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
   letter-spacing: 0.12em;
   color: var(--ink-faint);
   margin-bottom: 18px;
-  padding-left: 28px;
   display: block;
 }
 
@@ -877,15 +720,8 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 }
 .slider-btn.prev { left: 14px; }
 .slider-btn.next { right: 14px; }
-.slider-btn:hover {
-  background: var(--raspberry);
-  color: var(--paper);
-  box-shadow: 3px 3px 0 var(--ink);
-}
-.slider-btn:active { box-shadow: 1px 1px 0 var(--ink); }
-@media (max-width: 720px) {
-  .slider-btn { display: none; }
-}
+.slider-btn:hover { background: var(--raspberry); color: var(--paper); box-shadow: 3px 3px 0 var(--ink); }
+@media (max-width: 720px) { .slider-btn { display: none; } }
 
 .tweets-grid {
   display: flex;
@@ -905,17 +741,17 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 .tweet-card {
   flex: 0 0 320px;
   max-width: 320px;
+  min-height: 200px;
+  max-height: 340px;
   scroll-snap-align: start;
   border: 1.5px solid var(--ink);
   border-radius: 16px;
   background: var(--paper);
   padding: 8px;
   box-shadow: 4px 4px 0 var(--ink);
-  max-height: 320px;
   overflow: hidden;
   position: relative;
 }
-
 .tweet-card::after {
   content: '';
   position: absolute;
@@ -924,21 +760,46 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
   background: linear-gradient(to bottom, transparent, var(--paper));
   pointer-events: none;
   border-radius: 0 0 12px 12px;
+  z-index: 3;
 }
+.tweet-card.img-card::after { display: none; }
+.tweet-card.img-card { min-height: 0; }
+.tweet-card.img-card img { width: 100%; height: auto; border-radius: 12px; display: block; }
 
-@media (max-width: 600px) {
-  .tweet-card { flex: 0 0 86vw; max-width: 86vw; max-height: 340px; }
+@media (max-width: 600px) { .tweet-card { flex: 0 0 86vw; max-width: 86vw; } }
+
+/* Placeholder shown until the embed loads (or if X blocks it) */
+.tweet-fallback {
+  position: absolute;
+  inset: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 22px;
+  border: 1.5px dashed var(--ink);
+  border-radius: 12px;
+  background: var(--paper-2);
+  text-decoration: none;
+  color: var(--ink);
+  z-index: 0;
 }
+.tweet-fallback .tf-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--ink-soft);
+}
+.tweet-fallback .tf-cta { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; color: var(--raspberry); }
+.tweet-card.loaded .tweet-fallback { display: none; }
 
-/* keep twitter embed inside */
-.twitter-tweet { margin: 0 auto !important; max-width: 100% !important; }
+.tweet-embed { position: relative; z-index: 2; }
+.tweet-embed .twitter-tweet { margin: 0 auto !important; max-width: 100% !important; }
 
-/* IRL feature card (Cake Wallet) */
+/* ============ IRL FEATURE ============ */
 .irl-feature {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
-  margin-bottom: 56px;
   padding: 32px;
   background: var(--marigold);
   border: 1.5px solid var(--ink);
@@ -967,495 +828,29 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 .irl-feature h3 em { font-style: italic; }
 .irl-feature p { font-size: 16px; line-height: 1.55; max-width: 42ch; margin-bottom: 14px; }
 
-.irl-quote {
-  background: var(--paper);
-  border: 1.5px solid var(--ink);
-  border-radius: 14px;
-  padding: 20px 22px;
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-size: 17px;
-  line-height: 1.5;
-  font-variation-settings: "SOFT" 80, "opsz" 36;
-}
-.irl-quote::before { content: '\201C'; font-size: 36px; line-height: 0; vertical-align: -10px; margin-right: 4px; color: var(--raspberry); }
-
 .irl-feature-tweet {
   background: var(--paper);
   border: 1.5px solid var(--ink);
   border-radius: 14px;
   padding: 6px;
+  min-height: 220px;
   max-height: 480px;
   overflow: hidden;
   position: relative;
   align-self: start;
 }
-.irl-feature-tweet::after {
-  content: '';
-  position: absolute;
-  left: 6px; right: 6px; bottom: 6px;
-  height: 60px;
-  background: linear-gradient(to bottom, transparent, var(--paper));
-  pointer-events: none;
-  border-radius: 0 0 10px 10px;
-}
-.irl-feature-tweet .twitter-tweet { margin: 0 !important; }
-
-/* ============ SKILLS ============ */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-}
-
-.skill-block {
-  padding: 24px;
-  border: 1.5px solid var(--ink);
-  border-radius: 16px;
-  background: var(--paper);
-  box-shadow: 4px 4px 0 var(--ink);
-}
-.skill-block:nth-child(odd) { background: var(--paper-2); }
-
-.skill-block h4 {
-  font-family: 'Fraunces', serif;
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 14px;
-  letter-spacing: -0.01em;
-  font-variation-settings: "SOFT" 50, "opsz" 96;
-}
-.skill-block h4 em { font-style: italic; color: var(--raspberry); }
-
-.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.skill-tag {
-  padding: 5px 11px;
-  background: var(--paper-2);
-  border: 1.5px solid var(--ink);
-  border-radius: 100px;
+.irl-feature-tweet .tweet-fallback { inset: 6px; }
+.irl-feature-tweet.loaded .tweet-fallback { display: none; }
+.irl-link {
+  display: inline-block;
+  margin-top: 14px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11.5px;
-  font-weight: 500;
-}
-.skill-block:nth-child(odd) .skill-tag { background: var(--paper); }
-
-/* ============ ABOUT ============ */
-.about-section {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 96px 28px;
-  border-bottom: 1.5px solid var(--ink);
-  position: relative;
-  overflow: hidden;
-}
-.about-section .section-eyebrow { color: var(--paper); opacity: 0.9; }
-.about-section .section-eyebrow h2 { color: var(--butter); }
-.about-section .section-eyebrow .num { color: var(--ink); }
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 64px;
-  align-items: start;
-  position: relative;
-  z-index: 2;
-}
-
-.about-pfp-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.about-pfp {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--butter);
-  box-shadow: 8px 8px 0 var(--raspberry);
-  display: block;
-}
-
-.about-pfp-name {
-  font-family: 'Fraunces', serif;
-  font-size: 28px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  font-variation-settings: "SOFT" 80, "opsz" 96;
-  text-align: center;
-  margin-top: 12px;
-}
-.about-pfp-name em { font-style: italic; color: var(--butter); }
-
-.about-pfp-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--paper);
-  opacity: 0.65;
-  text-align: center;
-}
-
-.about-body {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(20px, 2.6vw, 28px);
-  line-height: 1.4;
-  font-weight: 400;
-  letter-spacing: -0.015em;
-  font-variation-settings: "SOFT" 50, "opsz" 96;
-  max-width: 56ch;
-}
-.about-body em { font-style: italic; color: var(--butter); }
-.about-body p + p { margin-top: 1.1em; }
-
-.about-links {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  max-width: 640px;
-}
-
-.about-link {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
-  background: rgba(254, 246, 232, 0.04);
-  border: 1.5px solid rgba(254, 246, 232, 0.25);
-  border-radius: 12px;
-  text-decoration: none;
-  color: var(--paper);
-  transition: all 0.2s;
-}
-.about-link:hover {
-  background: var(--butter);
+  font-size: 12px;
   color: var(--ink);
-  border-color: var(--butter);
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0 var(--raspberry);
-}
-
-.about-link-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  opacity: 0.7;
-  display: block;
-  margin-bottom: 4px;
-}
-.about-link-value {
-  font-family: 'Fraunces', serif;
-  font-size: 18px;
   font-weight: 500;
-  letter-spacing: -0.01em;
-  font-variation-settings: "SOFT" 50, "opsz" 36;
-}
-.about-link-arrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
-  opacity: 0.6;
-  transition: transform 0.2s, opacity 0.2s;
-}
-.about-link:hover .about-link-arrow { opacity: 1; transform: translateX(2px); }
-
-.about-link.static { cursor: default; }
-.about-link.static:hover {
-  background: rgba(254, 246, 232, 0.04);
-  color: var(--paper);
-  border-color: rgba(254, 246, 232, 0.25);
-  transform: none;
-  box-shadow: none;
-}
-.about-link.static:hover .about-link-arrow { transform: none; }
-
-@media (max-width: 900px) {
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .about-pfp-wrap { align-items: flex-start; }
-  .about-pfp { width: 200px; height: 200px; box-shadow: 6px 6px 0 var(--raspberry); }
-  .about-pfp-name, .about-pfp-tag { text-align: left; }
-  .about-links { grid-template-columns: 1fr; max-width: 100%; }
 }
 
-.about-section::after {
-  content: '';
-  position: absolute;
-  right: -40px; top: -40px;
-  width: 200px; height: 200px;
-  border-radius: 50%;
-  background: var(--raspberry);
-  border: 1.5px solid var(--paper);
-  z-index: 0;
-}
-
-/* ============ CONTACT ============ */
-.contact {
-  padding: 96px 28px 80px;
-  background: var(--ink);
-  border-bottom: 1.5px solid var(--ink);
-  position: relative;
-  overflow: hidden;
-  color: var(--paper);
-}
-
-.contact::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0.06;
-  background-image: radial-gradient(circle, var(--paper) 1px, transparent 1.5px);
-  background-size: 22px 22px;
-  pointer-events: none;
-}
-
-/* decorative circle */
-.contact::after {
-  content: '';
-  position: absolute;
-  right: -80px; bottom: -80px;
-  width: 320px; height: 320px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(254,246,232,0.1);
-  pointer-events: none;
-}
-
-.contact-inner { position: relative; z-index: 2; }
-
-.contact-eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em;
-  color: var(--butter); margin-bottom: 24px; font-weight: 500;
-}
-
-.contact h2 {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(48px, 8vw, 112px);
-  line-height: 0.92;
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  margin-bottom: 28px;
-  font-variation-settings: "SOFT" 50, "opsz" 144;
-  color: var(--paper);
-}
-.contact h2 em { font-style: italic; color: var(--raspberry); }
-
-.contact-tagline {
-  max-width: 520px;
-  font-size: 18px;
-  line-height: 1.55;
-  margin-bottom: 52px;
-  color: rgba(254,246,232,0.7);
-}
-.contact-tagline strong { color: var(--paper); font-weight: 600; }
-
-/* Primary CTAs — big, unmissable */
-.contact-primary {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 48px;
-}
-
-.contact-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 28px;
-  border-radius: 100px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
-  border: 1.5px solid var(--paper);
-}
-.contact-cta svg { width: 18px; height: 18px; flex-shrink: 0; }
-.contact-cta.primary {
-  background: var(--raspberry);
-  color: var(--paper);
-  border-color: var(--raspberry);
-  box-shadow: 4px 4px 0 var(--raspberry);
-}
-.contact-cta.primary:hover {
-  transform: translate(-2px,-2px);
-  box-shadow: 6px 6px 0 var(--butter);
-}
-.contact-cta.secondary {
-  background: transparent;
-  color: var(--paper);
-  box-shadow: 4px 4px 0 rgba(254,246,232,0.15);
-}
-.contact-cta.secondary:hover {
-  background: var(--paper);
-  color: var(--ink);
-  transform: translate(-2px,-2px);
-  box-shadow: 6px 6px 0 var(--raspberry);
-}
-
-/* Secondary links — compact row */
-.contact-secondary {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding-top: 32px;
-  border-top: 1px solid rgba(254,246,232,0.12);
-}
-
-.contact-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 16px;
-  border: 1px solid rgba(254,246,232,0.2);
-  border-radius: 100px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 500;
-  text-decoration: none;
-  color: rgba(254,246,232,0.65);
-  transition: all 0.18s;
-}
-.contact-link svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.7; }
-.contact-link:hover {
-  color: var(--paper);
-  border-color: rgba(254,246,232,0.5);
-  background: rgba(254,246,232,0.06);
-}
-.contact-link.no-link { cursor: default; }
-.contact-link.no-link:hover {
-  background: transparent;
-  color: rgba(254,246,232,0.65);
-  border-color: rgba(254,246,232,0.2);
-}
-
-/* availability badge */
-.contact-avail {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  background: rgba(155,184,114,0.15);
-  border: 1px solid var(--sage);
-  border-radius: 100px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--sage);
-  font-weight: 500;
-  margin-bottom: 36px;
-}
-.contact-avail-dot {
-  width: 6px; height: 6px;
-  background: var(--sage);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-/* ============ FOOTER ============ */
-.footer {
-  padding: 24px 28px;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.footer .heart { color: var(--raspberry); }
-
-/* ============ MOBILE MENU (CSS-only) ============ */
-.nav-toggle, .nav-toggle-label { display: none; }
-
-@media (max-width: 720px) {
-  .header { padding: 12px 18px; flex-wrap: wrap; }
-  .header nav { display: none; }
-  .header .status-pill { font-size: 10px; padding: 4px 9px; }
-
-  .nav-toggle-label {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px; height: 30px;
-    border: 1.5px solid var(--ink);
-    border-radius: 8px;
-    background: var(--paper);
-    box-shadow: 2px 2px 0 var(--ink);
-    cursor: pointer;
-    font-size: 16px;
-    order: 3;
-  }
-  .nav-toggle:checked ~ nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
-    order: 4;
-    margin-top: 12px;
-    border-top: 1.5px solid var(--ink);
-  }
-  .nav-toggle:checked ~ nav a {
-    padding: 12px 4px;
-    border-bottom: 1px solid rgba(31,26,20,0.12);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-  }
-  .hero { padding: 100px 20px 60px; }
-  .section, .stats, .about-section, .contact { padding-left: 20px; padding-right: 20px; }
-  .footer { padding: 20px; flex-direction: column; align-items: flex-start; }
-  .stats { padding-top: 60px; padding-bottom: 60px; }
-  .section { padding-top: 64px; padding-bottom: 64px; }
-}
-
-/* Reveal animations */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
-.reveal.in { opacity: 1; transform: translateY(0); }
-
-/* ============ TWEET CARD FALLBACK / SKELETON ============ */
-.tweet-card {
-  position: relative;
-  min-height: 180px;
-}
-.tweet-card .tweet-fallback {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  padding: 22px;
-  border: 1.5px dashed var(--ink);
-  border-radius: 14px;
-  background: var(--paper-2);
-  text-decoration: none;
-  color: var(--ink);
-  z-index: 0;
-}
-.tweet-card iframe { position: relative; z-index: 2; background: var(--paper); }
-.tweet-card .tweet-fallback .tf-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--ink-soft);
-}
-.tweet-card .tweet-fallback .tf-cta {
-  font-family: 'Fraunces', serif; font-style: italic; font-size: 18px;
-  color: var(--raspberry);
-}
-
-/* ============ SELECTED WRITING ============ */
+/* ============ WRITING ============ */
 .writing-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1489,7 +884,7 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 /* ============ TESTIMONIALS ============ */
 .tmt-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 22px;
 }
 .tmt-card {
@@ -1498,7 +893,6 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
   border-radius: 18px;
   background: var(--paper-2);
   box-shadow: 5px 5px 0 var(--ink);
-  position: relative;
 }
 .tmt-card:nth-child(1) { background: var(--sky); }
 .tmt-card:nth-child(2) { background: var(--sage); }
@@ -1513,20 +907,249 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 .tmt-card .tmt-who { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; }
 .tmt-card .tmt-role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-soft); margin-top: 3px; }
 
+/* ============ SKILLS ============ */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.skill-block {
+  padding: 24px;
+  border: 1.5px solid var(--ink);
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.skill-block:nth-child(odd) { background: var(--paper-2); }
+.skill-block h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+  font-variation-settings: "SOFT" 50, "opsz" 96;
+}
+.skill-block h4 em { font-style: italic; color: var(--raspberry); }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-tag {
+  padding: 5px 11px;
+  background: var(--paper-2);
+  border: 1.5px solid var(--ink);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+}
+.skill-block:nth-child(odd) .skill-tag { background: var(--paper); }
+
+/* ============ CONTACT ============ */
+.contact {
+  padding: 96px 28px 80px;
+  background: var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+  color: var(--paper);
+}
+.contact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image: radial-gradient(circle, var(--paper) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+.contact::after {
+  content: '';
+  position: absolute;
+  right: -80px; bottom: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(254,246,232,0.1);
+  pointer-events: none;
+}
+.contact-inner { position: relative; z-index: 2; }
+
+.contact-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--butter); margin-bottom: 24px; font-weight: 500;
+}
+
+.contact h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(48px, 8vw, 112px);
+  line-height: 0.92;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  margin-bottom: 28px;
+  font-variation-settings: "SOFT" 50, "opsz" 144;
+  color: var(--paper);
+}
+.contact h2 em { font-style: italic; color: var(--raspberry); }
+
+.contact-tagline {
+  max-width: 520px;
+  font-size: 18px;
+  line-height: 1.55;
+  margin-bottom: 52px;
+  color: rgba(254,246,232,0.7);
+}
+.contact-tagline strong { color: var(--paper); font-weight: 600; }
+
+.contact-primary { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+
+.contact-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 28px;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+  border: 1.5px solid var(--paper);
+}
+.contact-cta svg { width: 18px; height: 18px; flex-shrink: 0; }
+.contact-cta.primary { background: var(--raspberry); color: var(--paper); border-color: var(--raspberry); box-shadow: 4px 4px 0 var(--raspberry); }
+.contact-cta.primary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--butter); }
+.contact-cta.secondary { background: transparent; color: var(--paper); box-shadow: 4px 4px 0 rgba(254,246,232,0.15); }
+.contact-cta.secondary:hover { background: var(--paper); color: var(--ink); transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--raspberry); }
+
+.contact-secondary {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 32px;
+  border-top: 1px solid rgba(254,246,232,0.12);
+}
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid rgba(254,246,232,0.2);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  text-decoration: none;
+  color: rgba(254,246,232,0.7);
+  transition: all 0.18s;
+}
+.contact-link:hover { color: var(--paper); border-color: rgba(254,246,232,0.5); background: rgba(254,246,232,0.06); }
+.contact-link.no-link { cursor: default; text-transform: none; }
+.contact-link.no-link:hover { background: transparent; color: rgba(254,246,232,0.7); border-color: rgba(254,246,232,0.2); }
+
+.contact-avail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(155,184,114,0.15);
+  border: 1px solid var(--sage);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sage);
+  font-weight: 500;
+  margin-bottom: 36px;
+}
+.contact-avail-dot { width: 6px; height: 6px; background: var(--sage); border-radius: 50%; animation: pulse 2s infinite; }
+
+/* ============ FOOTER ============ */
+.footer {
+  padding: 24px 28px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-top: 1px solid rgba(254,246,232,0.12);
+}
+
+/* ============ MOBILE MENU (CSS-only) ============ */
+.nav-toggle, .nav-toggle-label { display: none; }
+
+@media (max-width: 860px) {
+  .header { padding: 12px 18px; flex-wrap: wrap; }
+  .header nav { display: none; }
+  .header .status-pill { font-size: 10px; padding: 4px 9px; margin-left: auto; margin-right: 10px; }
+
+  .nav-toggle-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 30px;
+    border: 1.5px solid var(--ink);
+    border-radius: 8px;
+    background: var(--paper);
+    box-shadow: 2px 2px 0 var(--ink);
+    cursor: pointer;
+    font-size: 16px;
+    order: 3;
+  }
+  .nav-toggle:checked ~ nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    order: 4;
+    margin-top: 12px;
+    border-top: 1.5px solid var(--ink);
+  }
+  .nav-toggle:checked ~ nav a { padding: 12px 4px; border-bottom: 1px solid rgba(31,26,20,0.12); }
+}
+
+@media (max-width: 720px) {
+  .hero { padding: 100px 20px 60px; }
+  .section, .stats, .contact { padding-left: 20px; padding-right: 20px; }
+  .slider-wrap { margin: 0 -20px; }
+  .tweets-grid { padding-left: 20px; padding-right: 20px; scroll-padding-left: 20px; }
+  .footer { padding: 20px; flex-direction: column; align-items: flex-start; }
+  .stats { padding-top: 60px; padding-bottom: 60px; }
+  .section { padding-top: 64px; padding-bottom: 64px; }
+  .marquee { font-size: 22px; padding: 16px 0; }
+}
+
+/* Reveal animations */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track, .status-dot, .contact-avail-dot { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
 </style>
 </head>
 <body>
 
 <header class="header">
-  <div class="logo">Apurva <em>Crypto</em></div>
+  <a href="#" class="logo">Apurva <em>Crypto</em></a>
   <input type="checkbox" class="nav-toggle" id="nav-toggle">
   <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle menu">&#9776;</label>
   <nav>
     <a href="#work">Work</a>
     <a href="#experience">Experience</a>
-    <a href="#writing">Writing</a>
     <a href="#events">Events</a>
     <a href="#spaces">Spaces</a>
+    <a href="#writing">Writing</a>
+    <a href="#posts">Highlights</a>
     <a href="#testimonials">Praise</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -1539,8 +1162,6 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 <!-- ========== HERO ========== -->
 <section class="hero">
   <div class="hero-blob b1"></div>
-  <div class="hero-blob b2"></div>
-  <div class="hero-blob b3"></div>
   <div class="hero-blob b4"></div>
 
   <div class="hero-content">
@@ -1570,7 +1191,7 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
   </div>
 
   <aside class="hero-card">
-    <img src="assets/PFP.jpg" alt="Apurva Crypto" class="hero-pfp">
+    <img src="assets/PFP.jpg" alt="Apurva Jain" class="hero-pfp" width="140" height="140" fetchpriority="high" decoding="async">
     <div class="hero-name">Apurva <em>Crypto</em></div>
     <div class="hero-locale">
       <span>GMT +5:30</span>
@@ -1579,16 +1200,16 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
     </div>
 
     <div class="hero-socials">
-      <a href="https://x.com/apurvajain24" target="_blank" rel="noopener" class="hero-social" aria-label="Twitter">
+      <a href="https://x.com/apurvajain24" target="_blank" rel="noopener" class="hero-social" aria-label="X (Twitter)">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        <span>Twitter</span>
+        <span>X / Twitter</span>
       </a>
       <a href="https://www.linkedin.com/in/jainapurva24" target="_blank" rel="noopener" class="hero-social" aria-label="LinkedIn">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         <span>LinkedIn</span>
       </a>
       <a href="https://www.quora.com/profile/Apurva-Jain-161" target="_blank" rel="noopener" class="hero-social" aria-label="Quora">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.738 18.701c-.831-1.635-1.805-3.287-3.708-3.287-.362 0-.727.061-1.057.21l-.646-1.292c.787-.677 2.064-1.197 3.71-1.197 2.555 0 3.872 1.224 4.926 2.795.621-1.376.928-3.183.928-5.42 0-5.59-1.752-8.46-5.864-8.46-4.05 0-5.8 2.87-5.8 8.46 0 5.564 1.75 8.4 5.8 8.4.575 0 1.108-.04 1.605-.169h.046zm1.92.169c2.36-1.224 4.135-3.872 4.135-9.085 0-5.834-3.038-9.246-7.706-9.246-4.595 0-7.665 3.413-7.665 9.246 0 5.812 3.062 9.155 7.665 9.155.6 0 1.193-.046 1.83-.193 1.06 1.61 2.42 3.222 4.795 3.222 2.564 0 3.62-1.96 3.62-3.625h-1.61c0 .724-.27 1.36-1.04 1.36-1.062 0-1.74-1.061-2.024-1.834z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.738 18.701c-.831-1.635-1.805-3.287-3.708-3.287-.362 0-.727.061-1.057.21l-.646-1.292c.787-.677 2.064-1.197 3.71-1.197 2.555 0 3.872 1.224 4.926 2.795.621-1.376.928-3.183.928-5.42 0-5.59-1.752-8.46-5.864-8.46-4.05 0-5.8 2.87-5.8 8.46 0 5.564 1.75 8.4 5.8 8.4.575 0 1.108-.04 1.605-.169h.046zm1.92.169c2.36-1.224 4.135-3.872 4.135-9.085 0-5.834-3.038-9.246-7.706-9.246-4.595 0-7.665 3.413-7.665 9.246 0 5.812 3.062 9.155 7.665 9.155.6 0 1.193-.046 1.83-.193 1.06 1.61 2.42 3.222 4.795 3.222 2.564 0 3.62-1.960 3.62-3.625h-1.61c0 .724-.27 1.36-1.04 1.36-1.062 0-1.74-1.061-2.024-1.834z"/></svg>
         <span>Quora</span>
       </a>
       <a href="https://t.me/jain_apurva24" target="_blank" rel="noopener" class="hero-social" aria-label="Telegram">
@@ -1599,7 +1220,7 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         <span>Email</span>
       </a>
-      <span class="hero-social static" aria-label="Discord">
+      <span class="hero-social static" aria-label="Discord username jain_apurva24">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
         <span>jain_apurva24</span>
       </span>
@@ -1609,7 +1230,7 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 
 <!-- ========== STATS ========== -->
 <section class="stats">
-  <div class="stats-eyebrow"> The numbers</div>
+  <div class="stats-eyebrow">The numbers</div>
   <h2 class="stats-title">Where the <em>receipts</em> live.</h2>
 
   <div class="stats-grid">
@@ -1662,92 +1283,46 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 </section>
 
 <!-- ========== MARQUEE ========== -->
-<div class="marquee">
-  <div class="marquee-track">
-    <span>Somnia <span class="star">&#10022;</span></span>
-    <span>Galxe <span class="star">&#10022;</span></span>
-    <span>Arbitrum <span class="star">&#10022;</span></span>
-    <span>Capx AI <span class="star">&#10022;</span></span>
-    <span>zkPass <span class="star">&#10022;</span></span>
-    <span>Polyhedra <span class="star">&#10022;</span></span>
-    <span>Nomina <span class="star">&#10022;</span></span>
-    <span>Burnt XION <span class="star">&#10022;</span></span>
-    <span>Sei Network <span class="star">&#10022;</span></span>
-    <span>Supra Labs <span class="star">&#10022;</span></span>
-    <span>0G Labs <span class="star">&#10022;</span></span>
-    <span>Sova Labs <span class="star">&#10022;</span></span>
-    <span>Fuse Network <span class="star">&#10022;</span></span>
-    <span>Blazpay <span class="star">&#10022;</span></span>
-    <span>Hydro Protocol <span class="star">&#10022;</span></span>
-    <span>KiloEx <span class="star">&#10022;</span></span>
-    <span>Primex <span class="star">&#10022;</span></span>
-    <span>Combo <span class="star">&#10022;</span></span>
-    <span>Ryze <span class="star">&#10022;</span></span>
-    <span>Agni Finance <span class="star">&#10022;</span></span>
-    <span>AIRian <span class="star">&#10022;</span></span>
-    <span>Melon NFT <span class="star">&#10022;</span></span>
-    <!-- duplicate for seamless loop -->
-    <span>Somnia <span class="star">&#10022;</span></span>
-    <span>Galxe <span class="star">&#10022;</span></span>
-    <span>Arbitrum <span class="star">&#10022;</span></span>
-    <span>Capx AI <span class="star">&#10022;</span></span>
-    <span>zkPass <span class="star">&#10022;</span></span>
-    <span>Polyhedra <span class="star">&#10022;</span></span>
-    <span>Nomina <span class="star">&#10022;</span></span>
-    <span>Burnt XION <span class="star">&#10022;</span></span>
-    <span>Sei Network <span class="star">&#10022;</span></span>
-    <span>Supra Labs <span class="star">&#10022;</span></span>
-    <span>0G Labs <span class="star">&#10022;</span></span>
-    <span>Sova Labs <span class="star">&#10022;</span></span>
-    <span>Fuse Network <span class="star">&#10022;</span></span>
-    <span>Blazpay <span class="star">&#10022;</span></span>
-    <span>Hydro Protocol <span class="star">&#10022;</span></span>
-    <span>KiloEx <span class="star">&#10022;</span></span>
-    <span>Primex <span class="star">&#10022;</span></span>
-    <span>Combo <span class="star">&#10022;</span></span>
-    <span>Ryze <span class="star">&#10022;</span></span>
-    <span>Agni Finance <span class="star">&#10022;</span></span>
-    <span>AIRian <span class="star">&#10022;</span></span>
-    <span>Melon NFT <span class="star">&#10022;</span></span>
-  </div>
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marqueeTrack"></div>
 </div>
 
-<!-- ========== WHAT I DO / ROLES ========== -->
+<!-- ========== WHAT I DO ========== -->
 <section class="section reveal" id="work">
   <div class="section-eyebrow">
-    <span class="num"> 01</span>
+    <span class="num">01</span>
     <h2>What I do</h2>
   </div>
-  <h3 class="section-title">Four roles, <em>One mission</em>.</h3>
+  <h3 class="section-title">Four roles I get <em>hired for</em>.</h3>
 
   <div class="roles">
 
     <div class="role-card r1">
       <div class="role-num">01</div>
       <h3>Community Manager</h3>
-      <p class="role-desc">Building Discord/Telegram/X communities from zero. Setting up bots, designing campaigns, fostering long-haul engagement.</p>
+      <p class="role-desc">Building Discord, Telegram and X communities from zero. Setting up bots, designing campaigns, and keeping people engaged long after launch.</p>
       <div class="role-projects">Worked at</div>
       <div class="role-list">
-        <span class="role-tag">Melon NFT</span>
         <span class="role-tag">Capx AI</span>
         <span class="role-tag">Hydro Protocol</span>
         <span class="role-tag">AIRian</span>
+        <span class="role-tag">Melon NFT</span>
       </div>
     </div>
 
     <div class="role-card r2">
       <div class="role-num">02</div>
       <h3>Moderator</h3>
-      <p class="role-desc">Front-line Discord &amp; Telegram support. Ticket handling, scam prevention, escalations - the unglamorous work that holds a community together.</p>
+      <p class="role-desc">Front-line Discord and Telegram support. Ticket handling, scam prevention and escalations: the everyday work that keeps a community running.</p>
       <div class="role-projects">Moderated for</div>
       <div class="role-list">
         <span class="role-tag">Galxe</span>
+        <span class="role-tag">Somnia</span>
+        <span class="role-tag">zkPass</span>
         <span class="role-tag">Nomina</span>
         <span class="role-tag">Burnt XION</span>
-        <span class="role-tag">zkPass</span>
-        <span class="role-tag">Polyhedra</span>
         <span class="role-tag">Blazpay</span>
-        <span class="role-tag">Somnia</span>
+        <span class="role-tag">Polyhedra</span>
         <span class="role-tag">Sova Labs</span>
       </div>
     </div>
@@ -1755,30 +1330,30 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
     <div class="role-card r3">
       <div class="role-num">03</div>
       <h3>Ambassador</h3>
-      <p class="role-desc">Writing articles &amp; threads, hosting AMAs, growing regional communities in Hindi. Translating protocols for people who actually use them.</p>
+      <p class="role-desc">Writing articles and threads, hosting AMAs, and growing regional communities in Hindi. Explaining protocols to the people who actually use them.</p>
       <div class="role-projects">Repped</div>
       <div class="role-list">
         <span class="role-tag">Arbitrum</span>
         <span class="role-tag">Sei Network</span>
-        <span class="role-tag">Supra Labs</span>
         <span class="role-tag">0G Labs</span>
+        <span class="role-tag">Supra Labs</span>
+        <span class="role-tag">KiloEx</span>
         <span class="role-tag">Fuse Network</span>
         <span class="role-tag">Nomina</span>
-        <span class="role-tag">KiloEx</span>
         <span class="role-tag">Combo</span>
         <span class="role-tag">Primex</span>
         <span class="role-tag">Ryze</span>
-        <span class="role-tag">Agni</span>
+        <span class="role-tag">Agni Finance</span>
       </div>
     </div>
 
     <div class="role-card r4">
       <div class="role-num">04</div>
       <h3>Ghostwriter</h3>
-      <p class="role-desc">Writing X threads and LinkedIn posts for founders, summits, and projects who need a steady voice. Their tone, my craft, invisible on the byline, careful on the page.</p>
-      <div class="role-projects">WRITTEN FOR</div>
+      <p class="role-desc">Writing X threads and LinkedIn posts for founders, summits and projects that need a steady voice. Their tone, my writing, their name on the byline.</p>
+      <div class="role-projects">Written for</div>
       <div class="role-list">
-        <a href="https://x.com/HouseofChimera" target="_blank" rel="noopener" class="role-tag">House Of Chimera</a>
+        <a href="https://x.com/HouseofChimera" target="_blank" rel="noopener" class="role-tag">House of Chimera</a>
         <a href="https://x.com/Vault__Summit" target="_blank" rel="noopener" class="role-tag">Vault Summit</a>
         <a href="https://x.com/_ConvergenceAI" target="_blank" rel="noopener" class="role-tag">Convergence Summit</a>
         <a href="https://www.linkedin.com/company/convergence-summit/" target="_blank" rel="noopener" class="role-tag">Convergence Summit LinkedIn</a>
@@ -1792,7 +1367,7 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 <!-- ========== EXPERIENCE ========== -->
 <section class="section reveal" id="experience">
   <div class="section-eyebrow">
-    <span class="num"> 02</span>
+    <span class="num">02</span>
     <h2>Experience</h2>
   </div>
   <h3 class="section-title">Selected roles, <em>by role</em>.</h3>
@@ -1816,257 +1391,135 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
 </section>
 
 <!-- ========== IRL EVENTS ========== -->
-<section class="section reveal" id="events">
+<section class="section reveal" id="events" data-tweets>
   <div class="section-eyebrow">
-    <span class="num"> 03</span>
+    <span class="num">03</span>
     <h2>IRL events</h2>
   </div>
   <h3 class="section-title">Hosting people, <em>in person</em>.</h3>
 
   <div class="irl-feature">
     <div>
-      <div class="feat-label"> COMMUNITY EVENT &middot; 2026</div>
+      <div class="feat-label">Community event &middot; 2026</div>
       <h3>I bring crypto <em>off the screen</em>.</h3>
-      <p>Beyond Discord channels, I gather Web3 communities <strong>in real life</strong>, organizing meetups, panels, and city-level builder gatherings. Showing up matters more than scaling.</p>
-      <p style="opacity: 0.9;">Recently held. More cities, soon. The energy of being in the same room as people who are actually building, that doesn't translate online.</p>
+      <p>Beyond Discord channels, I bring Web3 communities together <strong>in real life</strong>, organizing meetups, panels and city-level builder gatherings. Showing up in person matters more than chasing scale.</p>
+      <p style="opacity: 0.9;">Recently held one, with more cities coming. Being in the same room as people who are actually building has an energy that doesn't come through online.</p>
     </div>
-    <div class="irl-feature-tweet">
-      <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-        <a href="https://twitter.com/apurvajain24/status/2058245757602549855"></a>
-      </blockquote>
-      <a href="https://x.com/apurvajain24/status/2058245757602549855" target="_blank" rel="noopener" style="display:inline-block;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--raspberry);text-decoration:none;">View the meetup post on Twitter &#8599;</a>
+    <div>
+      <div class="irl-feature-tweet" data-tweet="2058245757602549855">
+        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2058245757602549855" target="_blank" rel="noopener">
+          <span class="tf-label">Meetup post on X</span>
+          <span class="tf-cta">View on X &#8599;</span>
+        </a>
+      </div>
+      <a class="irl-link" href="https://x.com/apurvajain24/status/2058245757602549855" target="_blank" rel="noopener">See the meetup post on X &#8599;</a>
     </div>
   </div>
 </section>
 
-<!-- ========== TWITTER SPACES ========== -->
-<section class="section reveal" id="spaces">
+<!-- ========== SPACES & AMAS ========== -->
+<section class="section reveal" id="spaces" data-tweets>
   <div class="section-eyebrow">
-    <span class="num"> 04</span>
+    <span class="num">04</span>
     <h2>Twitter Spaces &amp; AMAs</h2>
   </div>
   <h3 class="section-title">1,164+ joined. <em>I host the room.</em></h3>
-  <p class="highlights-intro">Hosted and moderated Twitter Spaces, AMAs, and panel discussions for leading Web3 projects. From ecosystem updates and product launches to market discussions and educational sessions, I've helped communities stay informed, engaged, and connected.</p>
+  <p class="section-intro">Hosted and moderated Twitter Spaces, AMAs and panel discussions for Web3 projects. Ecosystem updates, product launches, market discussions and educational sessions, all aimed at keeping communities informed and connected.</p>
 
-  <span class="slider-hint">&#8592; FEATURED SPACES &#8594;</span>
+  <span class="slider-hint">&#8592; Featured Spaces &#8594;</span>
 
   <div class="slider-wrap">
-    <button class="slider-btn prev" aria-label="Previous space">&#8592;</button>
-    <button class="slider-btn next" aria-label="Next space">&#8594;</button>
+    <button class="slider-btn prev" aria-label="Previous">&#8592;</button>
+    <button class="slider-btn next" aria-label="Next">&#8594;</button>
     <div class="tweets-grid">
-      <div class="tweet-card">
+      <div class="tweet-card img-card">
         <a href="https://x.com/apurvajain24/status/1893980135705170252" target="_blank" rel="noopener">
-          <img src="assets/Indian AMA Card.png" alt="0G Labs AMA" style="width:100%;height:auto;border-radius:12px;display:block;">
+          <img src="assets/Indian%20AMA%20Card.png" alt="0G Labs AMA card" loading="lazy" decoding="async">
         </a>
       </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://x.com/apurvajain24/status/1905324974577254514"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/1905324974577254514" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter &#8599;</span>
-        </a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://x.com/apurvajain24/status/1839263716011028834"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/1839263716011028834" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter &#8599;</span>
-        </a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
-          <a href="https://x.com/apurvajain24/status/1914721291979858025"></a>
-        </blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/1914721291979858025" target="_blank" rel="noopener">
-          <span class="tf-label">Post on Twitter</span>
-          <span class="tf-cta">View on Twitter &#8599;</span>
-        </a>
-      </div>
+      <div class="tweet-card" data-tweet="1905324974577254514"></div>
+      <div class="tweet-card" data-tweet="1839263716011028834"></div>
+      <div class="tweet-card" data-tweet="1914721291979858025"></div>
     </div>
   </div>
 </section>
 
-<!-- ========== SELECTED WRITING ========== -->
+<!-- ========== WRITING ========== -->
 <section class="section reveal" id="writing">
   <div class="section-eyebrow">
-    <span class="num"> 05</span>
+    <span class="num">05</span>
     <h2>Selected writing</h2>
   </div>
   <h3 class="section-title">Words that did the <em>work</em>.</h3>
-  <p class="highlights-intro">Threads, articles, and ghostwritten posts - the long-form proof behind the community work. Click through to read.</p>
+  <p class="section-intro">My own answers and articles, plus ghostwritten work for clients. Click through to read.</p>
 
   <div class="writing-grid">
 
     <a href="https://www.quora.com/profile/Apurva-Jain-161" target="_blank" rel="noopener" class="writing-card feat">
       <div class="w-platform"><span>Quora &middot; profile</span><span>&#8599;</span></div>
-      <div class="w-title">15K+ followers, 3.5M+ views</div>
-      <div class="w-desc">My longest-running writing home - crypto explainers, project breakdowns, and answers that consistently rank. The clearest proof I can hold an audience.</div>
+      <div class="w-title">15K+ followers, 3.8M+ views</div>
+      <div class="w-desc">My longest-running writing home: crypto explainers and project breakdowns that keep ranking years later.</div>
     </a>
 
     <a href="https://x.com/apurvajain24" target="_blank" rel="noopener" class="writing-card">
-      <div class="w-platform"><span>Twitter &middot; thread</span><span>&#8599;</span></div>
+      <div class="w-platform"><span>X &middot; thread</span><span>&#8599;</span></div>
       <div class="w-title">Research breakdown thread</div>
-      <div class="w-desc">A deep-dive thread on a project I worked with - structure, hook, payoff. Replace this card's link with the thread you're proudest of.</div>
+      <div class="w-desc">Deep-dive threads breaking down projects I've worked with: what they do, how they work, and why they matter.</div>
     </a>
 
     <a href="https://medium.com/@apurvajain" target="_blank" rel="noopener" class="writing-card">
       <div class="w-platform"><span>Medium &middot; article</span><span>&#8599;</span></div>
       <div class="w-title">Long-form project article</div>
-      <div class="w-desc">Ambassador articles written to onboard regional users. Point this at your best Medium piece (or remove if you don't use Medium).</div>
+      <div class="w-desc">Ambassador articles written to onboard regional users, from programs like Sei Network and Primex.</div>
     </a>
 
     <a href="https://www.linkedin.com/company/convergence-summit/posts/?feedView=all" target="_blank" rel="noopener" class="writing-card">
       <div class="w-platform"><span>Ghostwritten &middot; LinkedIn</span><span>&#8599;</span></div>
       <div class="w-title">Convergence Summit - speaker &amp; partner posts</div>
-      <div class="w-desc">Voice sample (with permission): announcement posts written in a strict house style, sourced quotes only. Invisible on the byline, careful on the page.</div>
+      <div class="w-desc">Speaker and partner announcement posts, written to a strict house style with sourced quotes only.</div>
     </a>
 
     <a href="https://x.com/Vault__Summit" target="_blank" rel="noopener" class="writing-card">
       <div class="w-platform"><span>Ghostwritten &middot; Twitter</span><span>&#8599;</span></div>
       <div class="w-title">Vault Summit - event voice</div>
-      <div class="w-desc">Ongoing X copy for a summit account: tone matched, schedule-driven, on-brand. Ghostwriting is invisible by design, so these are shared as voice references.</div>
+      <div class="w-desc">Ongoing X copy for an institutional DeFi summit, matched to their tone and posting schedule.</div>
     </a>
 
     <a href="https://x.com/apurvajain24" target="_blank" rel="noopener" class="writing-card">
-      <div class="w-platform"><span>Twitter &middot; opinion take</span><span>&#8599;</span></div>
+      <div class="w-platform"><span>X &middot; opinion take</span><span>&#8599;</span></div>
       <div class="w-title">A take that found its audience</div>
-      <div class="w-desc">Opinion posts on launches and TGE timing. Swap in a post that shows your point of view, not just reach.</div>
+      <div class="w-desc">My own takes on launches, airdrops and TGE timing.</div>
     </a>
 
   </div>
 </section>
 
-<!-- ========== TWITTER HIGHLIGHTS ========== -->
-<section class="section reveal" id="highlights">
+<!-- ========== X POSTS ========== -->
+<section class="section reveal" id="posts" data-tweets>
   <div class="section-eyebrow">
-    <span class="num"> 06</span>
+    <span class="num">06</span>
     <h2>Twitter highlights</h2>
   </div>
   <h3 class="section-title">Threads &amp; posts I'm <em>proud of</em>.</h3>
-  <p class="highlights-intro">A collection of threads, research posts, and community content created for Web3 audiences. Research breakdowns, ecosystem analysis, opinion pieces, and community-first content designed to educate, engage, and grow audiences.</p>
+  <p class="section-intro">Threads, research posts and community content written for Web3 audiences. Research breakdowns, ecosystem analysis and opinion pieces, written to educate people, start conversations and grow an audience.</p>
 
-  <span class="slider-hint">&#8592; FEATURED POSTS &#8594;</span>
+  <span class="slider-hint">&#8592; Most viewed first &#8594;</span>
 
   <div class="slider-wrap">
     <button class="slider-btn prev" aria-label="Previous post">&#8592;</button>
     <button class="slider-btn next" aria-label="Next post">&#8594;</button>
-    <div class="tweets-grid">
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2012406526108139607"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2066928262102884562" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2012406526108139607"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2107777410196521443" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2012406526108139607"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2067976715859845233" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2012406526108139607"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2010259083803373710" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2012406526108139607"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2110000102966235632" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2012406526108139607"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2082772940010193329" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2012406526108139607"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2108561757249880575" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2012406526108139607"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2108622429878944063" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2012406526108139607"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/1982838627521486925" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2012406526108139607"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2012406526108139607" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2010259083803373710"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2010259083803373710" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/1982838627521486925"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/1982838627521486925" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2018808036815691976"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2018808036815691976" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2022973318018859493"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2022973318018859493" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2015874864016719920"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2015874864016719920" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/1983727351612764493"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/1983727351612764493" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2014205747924705477"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2014205747924705477" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2014119739543703850"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2014119739543703850" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2014997337987538980"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2014997337987538980" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2020201471946662191"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2020201471946662191" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2038142942150574163"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2038142942150574163" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2016815595258597743"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2016815595258597743" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2015398820692287821"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2015398820692287821" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/1975263031501185366"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/1975263031501185366" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-      <div class="tweet-card">
-        <blockquote class="twitter-tweet" data-theme="light" data-dnt="true"><a href="https://x.com/apurvajain24/status/2026170542609588675"></a></blockquote>
-        <a class="tweet-fallback" href="https://x.com/apurvajain24/status/2026170542609588675" target="_blank" rel="noopener"><span class="tf-label">Post on Twitter</span><span class="tf-cta">View on Twitter &#8599;</span></a>
-      </div>
-    </div>
+    <div class="tweets-grid" id="postsGrid"></div>
   </div>
 </section>
 
 <!-- ========== TESTIMONIALS ========== -->
 <section class="section reveal" id="testimonials">
   <div class="section-eyebrow">
-    <span class="num"> 07</span>
+    <span class="num">07</span>
     <h2>What people say</h2>
   </div>
   <h3 class="section-title">Trust is the whole <em>currency</em>.</h3>
-  <p class="highlights-intro">In crypto, a reference from someone you worked with beats any stat. A few notes, messages, and moments of appreciation collected throughout the journey.</p>
+  <p class="section-intro">In crypto, a reference from someone you've worked with counts for more than any stat. A few notes and messages from people I've worked with along the way.</p>
 
   <div class="tmt-grid">
     <div class="tmt-card">
@@ -2087,14 +1540,14 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
   </div>
 </section>
 
-<!-- ========== SKILLS ========== -->
+<!-- ========== TOOLKIT ========== -->
 <section class="section reveal" id="skills">
   <div class="section-eyebrow">
-    <span class="num"> 08</span>
+    <span class="num">08</span>
     <h2>Toolkit</h2>
   </div>
   <h3 class="section-title">What I bring to the <em>server</em>.</h3>
-  <p class="highlights-intro">The skills, systems, and platforms I've used to support communities, run campaigns, create content, and keep Web3 users engaged.</p>
+  <p class="section-intro">The skills, systems and platforms I've used to support communities, run campaigns, create content and keep Web3 users engaged.</p>
 
   <div class="skills-grid">
     <div class="skill-block">
@@ -2181,45 +1634,145 @@ a.exp-row:hover .x-link { background:var(--ink); color:var(--paper); }
     <h2>Ready when<br>you <em>are.</em></h2>
 
     <p class="contact-tagline">
-      Looking for a community manager, mod, ambassador, or ghostwriter?
-      <strong>Telegram and Twitter DMs</strong> get the fastest reply, usually same day.
+      Need a community manager, mod, ambassador or ghostwriter?
+      <strong>Telegram and X DMs</strong> get the fastest reply, usually the same day.
     </p>
 
-    <!-- Primary CTAs -->
     <div class="contact-primary">
       <a href="https://t.me/jain_apurva24" target="_blank" rel="noopener" class="contact-cta primary">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12s5.374 12 12 12 12-5.373 12-12S18.626 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.643.135-.953l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12s5.374 12 12 12 12-5.373 12-12S18.626 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.643.135-.953l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
         Message on Telegram
       </a>
       <a href="https://x.com/apurvajain24" target="_blank" rel="noopener" class="contact-cta secondary">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        DM on Twitter
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        DM on X
       </a>
     </div>
-    
+
+
   </div>
 </section>
 
 <footer class="footer">
-  <div>&copy; 2026 Apurva Crypto &middot; Built with care <span class="heart">&#9829;</span></div>
-  <div>Made with care &middot; v.1.0</div>
+  <div>&copy; 2026 Apurva Jain &middot; apurvacrypto.xyz</div>
+  <div>Surat, India &middot; GMT+5:30</div>
 </footer>
 
-<!-- Twitter widget script -->
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 <script>
+// =====================================================================
+//  X POSTS — sorted by views, highest first. Add a post by pasting its status ID where it belongs.
+//  (The ID is the long number at the end of the post URL.)
+// =====================================================================
+const POST_IDS = [
+  '2066928262102884562',
+  '2107777410196521443',
+  '2067976715859845233',
+  '2012406526108139607',
+  '2010259083803373710',
+  '2082772940010193329',
+  '2110000102966235632',
+  '2108561757249880575',
+  '1982838627521486925',
+  '2108622429878944063',
+  '2018808036815691976',
+  '2022973318018859493',
+  '2015874864016719920',
+  '1983727351612764493',
+  '2014205747924705477',
+  '2014119739543703850',
+  '2014997337987538980',
+  '2020201471946662191',
+  '2038142942150574163',
+  '2016815595258597743',
+  '2015398820692287821',
+  '2026170542609588675',
+  '1975263031501185366',
+];
+
+const MARQUEE = ['Somnia','Galxe','Arbitrum','Capx AI','zkPass','Polyhedra','Nomina','Burnt XION','Sei Network','Supra Labs','0G Labs','Sova Labs','Fuse Network','Blazpay','Hydro Protocol','KiloEx','Primex','Combo','Ryze','Agni Finance','AIRian','Melon NFT'];
+
+// ============ MARQUEE ============
+(function () {
+  const half = MARQUEE.map(n => '<span>' + n + '<span class="star">&#10022;</span></span>').join('');
+  document.getElementById('marqueeTrack').innerHTML = half + half;
+})();
+
+// ============ BUILD POST CARDS ============
+document.getElementById('postsGrid').innerHTML =
+  [...new Set(POST_IDS)].map(id => '<div class="tweet-card" data-tweet="' + id + '"></div>').join('');
+
+// Every tweet card gets a clickable placeholder that shows until the embed is ready
+document.querySelectorAll('.tweet-card[data-tweet]').forEach(card => {
+  if (card.querySelector('.tweet-fallback')) return;
+  card.innerHTML =
+    '<a class="tweet-fallback" href="https://x.com/apurvajain24/status/' + card.dataset.tweet + '" target="_blank" rel="noopener">' +
+      '<span class="tf-label">Post on X</span><span class="tf-cta">View on X &#8599;</span>' +
+    '</a>';
+});
+
+// ============ LAZY X EMBEDS ============
+// widgets.js is only downloaded once a post section is close to the screen,
+// and each post is embedded only when its card is about to scroll into view.
+let twttrPromise = null;
+function loadTwitter() {
+  if (twttrPromise) return twttrPromise;
+  twttrPromise = new Promise(resolve => {
+    const s = document.createElement('script');
+    s.src = 'https://platform.twitter.com/widgets.js';
+    s.async = true;
+    s.charset = 'utf-8';
+    s.onload = () => (window.twttr && twttr.ready) ? twttr.ready(t => resolve(t)) : resolve(null);
+    s.onerror = () => resolve(null);
+    document.head.appendChild(s);
+  });
+  return twttrPromise;
+}
+
+function embedTweet(card) {
+  if (card.dataset.state) return;
+  card.dataset.state = 'loading';
+  loadTwitter().then(t => {
+    if (!t || !t.widgets) return; // blocked (adblock etc.) -> placeholder link stays
+    const holder = document.createElement('div');
+    holder.className = 'tweet-embed';
+    card.appendChild(holder);
+    t.widgets.createTweet(card.dataset.tweet, holder, {
+      theme: 'light', dnt: true, conversation: 'none', align: 'center'
+    }).then(el => {
+      if (el) card.classList.add('loaded');
+      else holder.remove(); // deleted / protected post -> keep the link
+    });
+  });
+}
+
+const sectionObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    obs.unobserve(entry.target);
+    const scroller = entry.target.querySelector('.tweets-grid');
+    const cards = entry.target.querySelectorAll('[data-tweet]');
+    if (!scroller) { cards.forEach(embedTweet); return; }
+    const cardObserver = new IntersectionObserver((items, o) => {
+      items.forEach(it => {
+        if (it.isIntersecting) { o.unobserve(it.target); embedTweet(it.target); }
+      });
+    }, { root: scroller, rootMargin: '0px 700px' });
+    cards.forEach(c => cardObserver.observe(c));
+  });
+}, { rootMargin: '600px 0px' });
+
+document.querySelectorAll('[data-tweets]').forEach(s => sectionObserver.observe(s));
+
 // ============ SCROLL REVEAL ============
-const observer = new IntersectionObserver((entries) => {
+const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('in');
-      observer.unobserve(entry.target);
+      revealObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.08 });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 // ============ SLIDER NAVIGATION ============
 document.querySelectorAll('.slider-wrap').forEach(wrap => {
@@ -2231,6 +1784,11 @@ document.querySelectorAll('.slider-wrap').forEach(wrap => {
   prev.addEventListener('click', () => grid.scrollBy({ left: -step(), behavior: 'smooth' }));
   next.addEventListener('click', () => grid.scrollBy({ left: step(),  behavior: 'smooth' }));
 });
+
+// Close the mobile menu after tapping a link
+document.querySelectorAll('.header nav a').forEach(a =>
+  a.addEventListener('click', () => { document.getElementById('nav-toggle').checked = false; })
+);
 
 // ============ EXPERIENCE — TABS + PAGINATION ============
 const ROLES = { cm:'Community Manager', mod:'Moderator', amb:'Ambassador', gw:'Ghostwriter' };
@@ -2251,10 +1809,10 @@ const DATA = [
   { name:'Nomina', url:'https://x.com/Nomina', foll:'508K', yr:'2023-24', role:'mod',
     tagline:'Power tools for onchain markets. (Formerly Omni Network.)',
     doing:'Moderation plus ambassador work, content, community, campaigns.' },
-  { name:'Somnia Network', url:'https://x.com/Somnia_Network', foll:'438K', yr:'2020-22', role:'mod',
+  { name:'Somnia Network', url:'https://x.com/Somnia_Network', foll:'438K', yr:'2024-Now', role:'mod',
     tagline:'The Agentic L1, fastest 1M+ TPS EVM L1 with Multistream Consensus.',
     doing:'Discussions, tickets, community events. My longest-running mod role.' },
-  { name:'Blazpay', url:'https://x.com/blazpaylabs', foll:'355K', yr:'2021-22', role:'mod',
+  { name:'Blazpay', url:'https://x.com/blazpaylabs', foll:'355K', yr:'2024-25', role:'mod',
     tagline:'Comprehensive AI and DeFi platform, BlazHub rewards and on-chain engagement.',
     doing:'Support on Discord and Telegram. Held the line during launch periods.' },
   { name:'zkPass', url:'https://x.com/zkPass', foll:'352K', yr:'2023-24', role:'mod',
@@ -2308,7 +1866,7 @@ const DATA = [
   { name:'Ryze Finance', url:'', foll:'', yr:'2022-23', role:'amb',
     tagline:'',
     doing:'Articles and videos, regional community, engagement activities.' },
-  { name:'Agni Finance', url:'https://x.com/Agnidex', foll:'27K', yr:'2021-22', role:'amb',
+  { name:'Agni Finance', url:'https://x.com/Agnidex', foll:'27K', yr:'2024', role:'amb',
     tagline:'High-capital-efficiency AMM DEX and Launchpad on Mantle.',
     doing:'Feature explainers, regional community, engagement activities.' },
   { name:'Melon NFT', url:'', foll:'', yr:'2021-22', role:'cm',
@@ -2330,16 +1888,15 @@ const cShown    = document.getElementById('cShown');
 const cTotal    = document.getElementById('cTotal');
 const pageDots  = document.getElementById('pageDots');
 
+const X_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
+
 function filtered() {
   return currentRole === 'all' ? DATA : DATA.filter(d => d.role === currentRole);
 }
 
 function rowHTML(item) {
-  const xIcon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
-  const xBtn = item.url
-    ? '<span class="x-link" aria-hidden="true">' + xIcon + '</span>'
-    : '';
-  const foll = item.foll ? '<span class="exp-followers">' + item.foll + '</span>' : '';
+  const xBtn = item.url ? '<span class="x-link" aria-hidden="true">' + X_ICON + '</span>' : '';
+  const foll = item.foll ? '<span class="exp-followers">' + item.foll + ' followers</span>' : '';
   const descParts = [item.tagline, item.doing].filter(Boolean);
   const desc = descParts.length ? '<p class="exp-desc">' + descParts.join(' \u2014 ') + '</p>' : '';
 
@@ -2376,8 +1933,7 @@ function render() {
   if (page >= totalPages) page = 0;
 
   const start = page * PER_PAGE;
-  const slice = list.slice(start, start + PER_PAGE);
-  listEl.innerHTML = slice.map(rowHTML).join('');
+  listEl.innerHTML = list.slice(start, start + PER_PAGE).map(rowHTML).join('');
 
   const from = total === 0 ? 0 : start + 1;
   const to = Math.min(start + PER_PAGE, total);
@@ -2393,8 +1949,7 @@ function render() {
   if (page >= totalPages - 1) {
     nextLabel.textContent = 'Start over \u2191';
   } else {
-    const remaining = total - to;
-    nextLabel.textContent = 'Show next ' + Math.min(PER_PAGE, remaining) + ' \u2192';
+    nextLabel.textContent = 'Show next ' + Math.min(PER_PAGE, total - to) + ' \u2192';
   }
   resetBtn.style.display = (multiPage && page > 0) ? 'inline-flex' : 'none';
 
