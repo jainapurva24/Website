@@ -899,10 +899,14 @@ $("form").onsubmit = async e => {
   try { const p = await fetchPM(pmAddr); pm = computePM(p.activity, p.closed, p.open); } catch(err){ pmErr = err; }
   loading(false);
 
+  if (hlErr) console.warn("Hyperliquid fetch failed:", hlErr);
+  if (pmErr) console.warn("Polymarket fetch failed:", pmErr);
   if (!hl && !pm){
-    $("err").textContent = (hlErr && pmErr)
-      ? "Couldn't reach the Hyperliquid or Polymarket APIs. Check your connection and try again."
-      : "No 2026 activity found for this address on Hyperliquid or Polymarket.";
+    const parts = [];
+    parts.push(hlErr ? "Couldn't reach Hyperliquid." : "No 2026 Hyperliquid trades on this address.");
+    parts.push(pmErr ? "Couldn't reach Polymarket." : "No 2026 Polymarket trades on this address. If you trade on Polymarket, use the address from your Polymarket profile (it's different from your wallet).");
+    $("err").textContent = parts.join(" ");
+    if (!$("pm").value) { $("pmField").style.display = "block"; $("pmToggle").style.display = "none"; }
     return;
   }
   try { history.replaceState(null, "", location.pathname + "?w=" + hlAddr); } catch(e){}
