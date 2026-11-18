@@ -398,7 +398,7 @@ async function fetchHLFunding(user){
 
 // Cloudflare Worker for share previews, leaderboard and the Polymarket proxy.
 // Leave empty and those features hide themselves; the core wrap still works.
-const API = "";
+const API = "https://onchain-wrapped-api.apurvacrypto.workers.dev";
 const params = new URLSearchParams(location.search);
 const API_BASE = (params.get("api") || API).replace(/\/$/, "");
 
