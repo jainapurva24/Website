@@ -1,0 +1,11 @@
+name = "onchain-wrapped-api"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+SITE_URL = "https://apurvacrypto.xyz/wrapped/"
+ALLOWED_ORIGINS = "https://apurvacrypto.xyz,https://www.apurvacrypto.xyz"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "REPLACE_WITH_KV_ID"
