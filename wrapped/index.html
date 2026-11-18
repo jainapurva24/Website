@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onchain Wrapped 2026</title>
+<meta name="description" content="Your 2026 on Hyperliquid and Polymarket, wrapped.">
+<meta property="og:title" content="Onchain Wrapped 2026">
+<meta property="og:description" content="Paste a wallet. Get your year in trades.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07070a; --fg:#f4f1ea; --dim:#8a8794; --line:#22212a;
+    --lime:#c6ff3d; --pink:#ff4fa3; --cyan:#3de0ff; --orange:#ff8a3d; --violet:#9b7bff;
+    --accent:var(--lime);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--fg);font-family:"Space Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+  button{font:inherit;cursor:pointer}
+
+  /* ---------- landing ---------- */
+  #landing{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:48px 24px;max-width:640px;margin:0 auto}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);margin-bottom:20px}
+  h1{font-size:clamp(48px,11vw,96px);line-height:.92;letter-spacing:-.04em;font-weight:700}
+  h1 em{font-style:normal;color:var(--lime)}
+  .sub{color:var(--dim);font-size:18px;margin:20px 0 36px;max-width:440px;line-height:1.45}
+  label{display:block;font-size:13px;color:var(--dim);margin:0 0 8px}
+  .field{margin-bottom:18px}
+  input{width:100%;background:#111017;border:1px solid var(--line);color:var(--fg);padding:16px 18px;border-radius:12px;font:15px "JetBrains Mono",monospace;outline:none;transition:border-color .15s}
+  input:focus{border-color:var(--lime)}
+  .hint{font-size:12px;color:var(--dim);margin-top:6px;line-height:1.4}
+  .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .btn{background:var(--lime);color:#0b0b0b;border:0;padding:16px 26px;border-radius:999px;font-weight:700;font-size:16px;transition:transform .1s}
+  .btn:active{transform:scale(.97)}
+  .btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+  .err{color:var(--pink);font-size:14px;margin-top:14px;min-height:20px}
+  .toggle{background:none;border:0;color:var(--dim);font-size:13px;text-decoration:underline;margin-bottom:18px}
+
+  /* ---------- loading ---------- */
+  #loading{position:fixed;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;gap:18px;background:var(--bg);z-index:20}
+  .spinner{width:56px;height:56px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--lime);animation:spin 0.8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  #loadMsg{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--dim)}
+
+  /* ---------- story ---------- */
+  #story{position:fixed;inset:0;display:none;background:var(--bg);z-index:10;user-select:none}
+  .bars{position:absolute;top:14px;left:14px;right:14px;display:flex;gap:4px;z-index:3}
+  .bars span{flex:1;height:3px;background:#ffffff26;border-radius:2px;overflow:hidden}
+  .bars span i{display:block;height:100%;width:0;background:var(--fg)}
+  .bars span.done i{width:100%}
+  .bars span.on i{animation:fill 6s linear forwards}
+  .paused .bars span.on i{animation-play-state:paused}
+  @keyframes fill{to{width:100%}}
+  .close{position:absolute;top:28px;right:16px;z-index:4;background:none;border:0;color:var(--fg);font-size:26px;opacity:.7}
+  .tap{position:absolute;top:0;bottom:0;z-index:2}
+  .tap.l{left:0;width:30%} .tap.r{right:0;width:70%}
+  .slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:72px 28px 48px;max-width:560px;margin:0 auto;overflow:hidden}
+  .slide.on{display:flex;animation:in .45s cubic-bezier(.2,.8,.2,1)}
+  @keyframes in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .glow{position:fixed;width:120vmax;height:120vmax;border-radius:50%;filter:blur(90px);opacity:.22;left:50%;top:60%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;transition:background .5s}
+  .slide > *{position:relative;z-index:1}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  .big{font-size:clamp(56px,15vw,112px);font-weight:700;letter-spacing:-.045em;line-height:.9;color:var(--accent)}
+  .line{font-size:clamp(24px,6vw,36px);font-weight:500;letter-spacing:-.02em;line-height:1.15}
+  .small{color:var(--dim);font-size:16px;margin-top:18px;line-height:1.45}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+  .stat{border-top:1px solid #ffffff22;padding-top:10px}
+  .stat b{display:block;font-size:26px;letter-spacing:-.02em}
+  .stat span{font-size:13px;color:var(--dim)}
+  .coinbars{margin-top:28px;display:flex;flex-direction:column;gap:14px}
+  .cb{display:flex;align-items:center;gap:12px}
+  .cb .n{width:28px;font-family:"JetBrains Mono",monospace;color:var(--dim)}
+  .cb .t{flex:1}
+  .cb .t div{font-size:22px;font-weight:700}
+  .cb .t i{display:block;height:8px;border-radius:4px;background:var(--accent);margin-top:6px;transform-origin:left;animation:grow .9s cubic-bezier(.2,.8,.2,1) both}
+  .cb .v{font-family:"JetBrains Mono",monospace;font-size:14px;color:var(--dim)}
+  @keyframes grow{from{transform:scaleX(0)}}
+  .split{display:flex;height:72px;border-radius:14px;overflow:hidden;margin-top:28px;font-weight:700}
+  .split div{display:flex;align-items:center;padding:0 16px;font-size:18px;color:#0b0b0b;min-width:0;white-space:nowrap}
+  .trade{border:1px solid #ffffff22;border-radius:16px;padding:18px;margin-top:16px}
+  .trade .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  .trade .p{font-size:36px;font-weight:700;letter-spacing:-.03em;margin:6px 0 2px}
+  .trade .d{font-size:14px;color:var(--dim)}
+  .pos{color:var(--lime)} .neg{color:var(--pink)}
+  svg.spark{width:100%;height:110px;margin-top:24px;overflow:visible}
+  .clock{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;align-items:end;height:120px;margin-top:28px}
+  .clock i{background:#ffffff1f;border-radius:3px 3px 0 0;min-height:3px}
+  .clock i.hot{background:var(--accent)}
+  .clocklbl{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--dim);margin-top:6px}
+  .persona{font-size:clamp(46px,12vw,88px);font-weight:700;letter-spacing:-.045em;line-height:.92;color:var(--accent)}
+  #cardWrap{width:100%;display:flex;justify-content:center}
+  #card{width:100%;max-width:380px;border-radius:16px;box-shadow:0 20px 60px #0008}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px;position:relative;z-index:5}
+  .actions .btn{padding:13px 20px;font-size:14px}
+  .note{text-align:center;font-size:12px;color:var(--dim);margin-top:12px;min-height:16px}
+  .demo-badge{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--dim);z-index:5;letter-spacing:.1em}
+  footer{color:var(--dim);font-size:12px;margin-top:48px;line-height:1.5}
+  footer a{color:var(--dim)}
+</style>
+</head>
+<body>
+
+<section id="landing">
+  <div class="kicker">Onchain Wrapped · 2026</div>
+  <h1>Your year,<br><em>onchain.</em></h1>
+  <p class="sub">Paste a wallet. See how your 2026 went on Hyperliquid and Polymarket: volume, best and worst trades, win rate, and what kind of trader you are.</p>
+
+  <form id="form" autocomplete="off">
+    <div class="field">
+      <label for="hl">Wallet address</label>
+      <input id="hl" placeholder="0x…" spellcheck="false">
+      <div class="hint">Your Hyperliquid trading address. Read-only, nothing to sign.</div>
+    </div>
+    <button type="button" class="toggle" id="pmToggle">+ Polymarket uses a different address</button>
+    <div class="field" id="pmField" style="display:none">
+      <label for="pm">Polymarket address</label>
+      <input id="pm" placeholder="0x… (from your Polymarket profile)" spellcheck="false">
+      <div class="hint">Polymarket trades from a proxy wallet. Copy it from your profile page.</div>
+    </div>
+    <div class="row">
+      <button class="btn" type="submit">Wrap my year →</button>
+      <button class="btn ghost" type="button" id="demoBtn">Try a demo wallet</button>
+    </div>
+    <div class="err" id="err"></div>
+  </form>
+  <footer>Data comes straight from the public Hyperliquid and Polymarket APIs in your browser. Nothing is stored.<br>Covers Jan 1, 2026 to today. Hyperliquid only serves your most recent 10,000 fills.</footer>
+</section>
+
+<div id="loading"><div class="spinner"></div><div id="loadMsg">Pulling your trades…</div></div>
+
+<section id="story">
+  <div class="glow" id="glow"></div>
+  <div class="bars" id="bars"></div>
+  <button class="close" id="closeBtn" aria-label="Close">×</button>
+  <div class="tap l" id="tapL"></div>
+  <div class="tap r" id="tapR"></div>
+  <div id="slides"></div>
+  <div class="demo-badge" id="demoBadge" style="display:none">DEMO DATA</div>
+</section>
+
+<script>
+/* =====================================================================
+   STATS ENGINE (pure functions, no DOM)
+   ===================================================================== */
+const YEAR = 2026;
+const YEAR_START = Date.UTC(YEAR, 0, 1);
+const YEAR_END = Date.UTC(YEAR + 1, 0, 1);
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function num(x){ const n = parseFloat(x); return isFinite(n) ? n : 0; }
+
+function computeHL(fills, funding){
+  fills = (fills || []).filter(f => f.time >= YEAR_START && f.time < YEAR_END);
+  if (!fills.length) return null;
+  fills.sort((a,b) => a.time - b.time);
+
+  let volume = 0, fees = 0, realized = 0, liqs = 0, longVol = 0, shortVol = 0;
+  const byCoin = {}, byOrder = {}, hours = new Array(24).fill(0), months = new Array(12).fill(0), days = new Set();
+  const curve = []; let cum = 0;
+
+  for (const f of fills){
+    const px = num(f.px), sz = num(f.sz), notional = px * sz;
+    const fee = num(f.fee), pnl = num(f.closedPnl);
+    volume += notional; fees += fee; realized += pnl;
+    cum += pnl - fee; curve.push([f.time, cum]);
+    byCoin[f.coin] = (byCoin[f.coin] || 0) + notional;
+    const dir = f.dir || "";
+    if (/Open Long/.test(dir)) longVol += notional;
+    else if (/Open Short/.test(dir)) shortVol += notional;
+    if (f.liquidation) liqs++;
+    const d = new Date(f.time);
+    hours[d.getHours()]++; months[d.getMonth()]++;
+    days.add(d.toDateString());
+    if (pnl !== 0){
+      const key = f.coin + ":" + (f.oid ?? f.hash ?? f.time);
+      const o = byOrder[key] || (byOrder[key] = { coin: f.coin, pnl: 0, time: f.time, dir, px, sz: 0 });
+      o.pnl += pnl; o.sz += sz;
+    }
+  }
+
+  let fundingNet = 0;
+  for (const x of (funding || [])){
+    if (x.time >= YEAR_START && x.time < YEAR_END) fundingNet += num(x.delta && x.delta.usdc);
+  }
+
+  const closes = Object.values(byOrder);
+  const wins = closes.filter(c => c.pnl > 0).length;
+  closes.sort((a,b) => b.pnl - a.pnl);
+  const coins = Object.entries(byCoin).sort((a,b) => b[1]-a[1]).map(([coin,vol]) => ({coin, vol}));
+  const directional = longVol + shortVol;
+
+  return {
+    trades: fills.length,
+    volume, fees, realized, fundingNet,
+    net: realized - fees + fundingNet,
+    liqs,
+    activeDays: days.size,
+    coins,
+    coinCount: coins.length,
+    longShare: directional ? longVol / directional : 0.5,
+    best: closes[0] && closes[0].pnl > 0 ? closes[0] : null,
+    worst: closes.length && closes[closes.length-1].pnl < 0 ? closes[closes.length-1] : null,
+    winRate: closes.length ? wins / closes.length : 0,
+    closes: closes.length,
+    hours, months,
+    peakHour: hours.indexOf(Math.max(...hours)),
+    peakMonth: months.indexOf(Math.max(...months)),
+    nightShare: hours.slice(0,5).reduce((a,b)=>a+b,0) / fills.length,
+    curve: downsample(curve, 80),
+    capped: fills.length >= 9990
+  };
+}
+
+function computePM(activity, closed, open){
+  const inYear = t => { const ms = t < 1e12 ? t*1000 : t; return ms >= YEAR_START && ms < YEAR_END; };
+  const trades = (activity || []).filter(a => (!a.type || a.type === "TRADE") && inYear(num(a.timestamp)));
+  const closedY = (closed || []).filter(c => c.timestamp == null || inYear(num(c.timestamp)));
+  if (!trades.length && !closedY.length) return null;
+
+  const markets = new Set(trades.map(t => t.conditionId || t.slug || t.title));
+  let wagered = 0, biggestBet = null;
+  for (const t of trades){
+    if ((t.side || "BUY") === "BUY"){
+      const u = num(t.usdcSize) || num(t.size) * num(t.price);
+      wagered += u;
+      if (!biggestBet || u > biggestBet.usd) biggestBet = { usd: u, title: t.title, outcome: t.outcome, price: num(t.price) };
+    }
+  }
+  const sorted = closedY.map(c => ({ pnl: num(c.realizedPnl), title: c.title, outcome: c.outcome, avgPrice: num(c.avgPrice) }))
+                        .sort((a,b) => b.pnl - a.pnl);
+  const realized = sorted.reduce((s,c) => s + c.pnl, 0);
+  const won = sorted.filter(c => c.pnl > 0).length;
+  const openPnl = (open || []).reduce((s,p) => s + num(p.cashPnl), 0);
+  // longest-odds win: lowest avg entry price among winners
+  const longshot = sorted.filter(c => c.pnl > 0 && c.avgPrice > 0).sort((a,b) => a.avgPrice - b.avgPrice)[0] || null;
+
+  return {
+    trades: trades.length,
+    markets: markets.size,
+    wagered, realized, openPnl,
+    hitRate: sorted.length ? won / sorted.length : 0,
+    resolved: sorted.length,
+    best: sorted[0] && sorted[0].pnl > 0 ? sorted[0] : null,
+    worst: sorted.length && sorted[sorted.length-1].pnl < 0 ? sorted[sorted.length-1] : null,
+    biggestBet, longshot
+  };
+}
+
+function persona(hl, pm){
+  if (hl){
+    const perDay = hl.trades / Math.max(1, hl.activeDays);
+    if (hl.liqs >= 3) return ["Liquidation Speedrunner", `${hl.liqs} liquidations. The market took tuition, and you kept enrolling.`];
+    if (hl.winRate >= 0.6 && hl.closes >= 20) return ["The Sniper", `${pct(hl.winRate)} of your closes were green. Patient, picky, precise.`];
+    if (perDay > 40) return ["The Degen Machine", `${Math.round(perDay)} fills per active day. Sleep was optional.`];
+    if (hl.nightShare > 0.3) return ["Night Owl", `${pct(hl.nightShare)} of your trades happened between midnight and 5am.`];
+    if (hl.longShare >= 0.75) return ["Perma-Bull", `${pct(hl.longShare)} of your opens were longs. Up only, apparently.`];
+    if (hl.longShare <= 0.25) return ["Professional Bear", `${pct(1-hl.longShare)} of your opens were shorts. You trust nothing.`];
+    if (hl.coinCount >= 25) return ["The Tourist", `You traded ${hl.coinCount} different coins. Loyalty is overrated.`];
+  }
+  if (pm && pm.markets >= 30) return ["Oracle in Training", `${pm.markets} markets called. You have opinions on everything.`];
+  if (pm && pm.longshot && pm.longshot.avgPrice < 0.2) return ["Longshot Hunter", `You hit a ${Math.round(pm.longshot.avgPrice*100)}¢ bet. Most people wouldn't touch it.`];
+  return ["The Grinder", "No gimmicks. You showed up and put in the reps."];
+}
+
+function downsample(arr, n){
+  if (arr.length <= n) return arr;
+  const out = [], step = (arr.length - 1) / (n - 1);
+  for (let i = 0; i < n; i++) out.push(arr[Math.round(i*step)]);
+  return out;
+}
+function pct(x){ return Math.round(x*100) + "%"; }
+function usd(x, sign){
+  const a = Math.abs(x), s = x < 0 ? "-" : (sign && x > 0 ? "+" : "");
+  let v;
+  if (a >= 1e9) v = (a/1e9).toFixed(a >= 1e10 ? 1 : 2) + "B";
+  else if (a >= 1e6) v = (a/1e6).toFixed(a >= 1e7 ? 1 : 2) + "M";
+  else if (a >= 1e4) v = (a/1e3).toFixed(1) + "K";
+  else v = a.toLocaleString("en-US", {maximumFractionDigits: a < 10 ? 2 : 0});
+  return s + "$" + v;
+}
+function hourLabel(h){ const ap = h < 12 ? "am" : "pm"; return ((h % 12) || 12) + ap; }
+function trim(s, n){ s = s || ""; return s.length > n ? s.slice(0, n-1) + "…" : s; }
+
+/* =====================================================================
+   DATA FETCHING
+   ===================================================================== */
+const HL_API = "https://api.hyperliquid.xyz/info";
+const PM_API = "https://data-api.polymarket.com";
+
+async function hlPost(body){
+  const r = await fetch(HL_API, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(body) });
+  if (!r.ok) throw new Error("Hyperliquid API " + r.status);
+  return r.json();
+}
+
+async function fetchHLFills(user, onProgress){
+  const all = new Map(); let start = YEAR_START; const end = Date.now();
+  for (let i = 0; i < 6; i++){
+    const page = await hlPost({ type:"userFillsByTime", user, startTime:start, endTime:end, aggregateByTime:true });
+    if (!Array.isArray(page) || !page.length) break;
+    for (const f of page) all.set(f.tid + ":" + f.time + ":" + f.coin, f);
+    onProgress && onProgress(all.size);
+    if (page.length < 2000) break;
+    const last = Math.max(...page.map(f => f.time));
+    if (last + 1 <= start) break;
+    start = last + 1;
+  }
+  return [...all.values()];
+}
+
+async function fetchHLFunding(user){
+  const out = []; let start = YEAR_START; const end = Date.now();
+  for (let i = 0; i < 25; i++){
+    const page = await hlPost({ type:"userFunding", user, startTime:start, endTime:end });
+    if (!Array.isArray(page) || !page.length) break;
+    out.push(...page);
+    const last = Math.max(...page.map(f => f.time));
+    if (page.length < 500 || last + 1 <= start) break;
+    start = last + 1;
+  }
+  return out;
+}
+
+async function pmGet(path){
+  const r = await fetch(PM_API + path);
+  if (!r.ok) throw new Error("Polymarket API " + r.status);
+  return r.json();
+}
+
+async function fetchPM(user){
+  const activity = [];
+  for (let off = 0; off < 5000; off += 500){
+    const page = await pmGet(`/activity?user=${user}&type=TRADE&limit=500&offset=${off}`);
+    if (!Array.isArray(page) || !page.length) break;
+    activity.push(...page);
+    const oldest = Math.min(...page.map(a => num(a.timestamp)));
+    if (page.length < 500 || oldest * 1000 < YEAR_START) break;
+  }
+  const closed = [];
+  for (let off = 0; off < 2000; off += 50){
+    let page;
+    try { page = await pmGet(`/closed-positions?user=${user}&limit=50&offset=${off}`); } catch(e){ break; }
+    if (!Array.isArray(page) || !page.length) break;
+    closed.push(...page);
+    if (page.length < 50) break;
+  }
+  let open = [];
+  try { open = await pmGet(`/positions?user=${user}&limit=500&sizeThreshold=0`); } catch(e){}
+  return { activity, closed, open: Array.isArray(open) ? open : [] };
+}
+
+/* =====================================================================
+   DEMO DATA (deterministic)
+   ===================================================================== */
+function demoData(){
+  let seed = 42; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const coins = [["HYPE",34,0.36],["BTC",88000,0.24],["ETH",3100,0.16],["SOL",160,0.1],["PUMP",0.006,0.07],["FARTCOIN",0.9,0.04],["XRP",2.4,0.03]];
+  const pick = () => { let r = rnd(), a = 0; for (const c of coins){ a += c[2]; if (r <= a) return c; } return coins[0]; };
+  const now = Math.min(Date.now(), YEAR_END - 1);
+  const fills = []; let tid = 1;
+  for (let i = 0; i < 1840; i++){
+    const [coin, base] = pick();
+    let t = YEAR_START + rnd() * (now - YEAR_START);
+    const d = new Date(t); const h = rnd() < 0.34 ? Math.floor(rnd()*4) : Math.floor(rnd()*24);
+    d.setHours(h); t = Math.min(d.getTime(), now);
+    const px = base * (0.7 + rnd()*0.6); const notional = 300 + Math.pow(rnd(), 2.2) * 42000;
+    const isClose = rnd() < 0.45, isLong = rnd() < 0.68;
+    const dir = (isClose ? "Close " : "Open ") + (isLong ? "Long" : "Short");
+    let pnl = 0;
+    if (isClose){ pnl = (rnd() < 0.56 ? 1 : -1) * Math.pow(rnd(), 2) * notional * 0.18; if (rnd() < 0.004) pnl = 9200 + rnd()*3000; }
+    const f = { coin, px: String(px), sz: String(notional/px), time: Math.floor(t), dir, closedPnl: String(pnl.toFixed(2)), fee: String((notional*0.00035).toFixed(4)), oid: tid, tid: tid++, hash: "0x" };
+    if (isClose && pnl < -2500 && rnd() < 0.15) f.liquidation = { method: "market" };
+    fills.push(f);
+  }
+  const funding = Array.from({length: 300}, () => ({ time: YEAR_START + Math.floor(rnd()*(now-YEAR_START)), delta: { usdc: String(((rnd()-0.6)*12).toFixed(2)) } }));
+  const mkts = ["Fed cuts rates in December?","BTC above $100k on Dec 31?","Will HYPE flip SOL in 2026?","India wins the T20 World Cup?","GTA VI released in 2026?","OpenAI announces GPT-6 by Q3?","ETH ETF staking approved?","Messi plays in the 2026 World Cup final?","Elon tweets 'Dogecoin' in October?","US recession in 2026?","Nvidia largest company on June 30?","Polymarket token launched by year end?"];
+  const activity = [], closed = [];
+  mkts.forEach((title, i) => {
+    const n = 2 + Math.floor(rnd()*6);
+    for (let k = 0; k < n; k++){
+      const price = 0.08 + rnd()*0.8, usdc = 20 + Math.pow(rnd(),2)*1800;
+      activity.push({ type:"TRADE", side: rnd() < 0.8 ? "BUY" : "SELL", title, outcome: rnd()<0.6?"Yes":"No", price, usdcSize: usdc, size: usdc/price, conditionId: "c"+i, timestamp: Math.floor((YEAR_START + rnd()*(now-YEAR_START))/1000) });
+    }
+    const avg = i === 3 ? 0.11 : 0.2 + rnd()*0.6;
+    closed.push({ title, outcome: "Yes", avgPrice: avg, realizedPnl: i === 3 ? 2380 : (rnd()<0.58?1:-1)*rnd()*900, timestamp: Math.floor((YEAR_START + rnd()*(now-YEAR_START))/1000) });
+  });
+  return { fills, funding, activity, closed, open: [{ cashPnl: 140 }] };
+}
+
+/* =====================================================================
+   STORY UI
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+let slides = [], idx = 0, timer = null, state = null;
+const PALETTE = ["#c6ff3d","#3de0ff","#ff4fa3","#ff8a3d","#9b7bff"];
+
+function slide(accent, html){ return { accent, html }; }
+
+function buildSlides(hl, pm, who, isDemo){
+  const out = [];
+  const short = who ? who.slice(0,6) + "…" + who.slice(-4) : "demo.eth";
+  out.push(slide(PALETTE[0], `
+    <div class="eyebrow">${short}</div>
+    <div class="big">2026,<br>wrapped.</div>
+    <p class="small">${hl ? hl.trades.toLocaleString() + " fills" : ""}${hl && pm ? " · " : ""}${pm ? pm.markets + " prediction markets" : ""}. Let's see how it went.</p>`));
+
+  if (hl){
+    out.push(slide(PALETTE[1], `
+      <div class="eyebrow">Hyperliquid volume</div>
+      <div class="line">This year you pushed</div>
+      <div class="big">${usd(hl.volume)}</div>
+      <div class="line">through Hyperliquid.</div>
+      <div class="stats">
+        <div class="stat"><b>${hl.trades.toLocaleString()}</b><span>fills</span></div>
+        <div class="stat"><b>${hl.activeDays}</b><span>days you traded</span></div>
+        <div class="stat"><b>${hl.coinCount}</b><span>different coins</span></div>
+        <div class="stat"><b>${usd(hl.fees)}</b><span>paid in fees</span></div>
+      </div>
+      ${hl.capped ? '<p class="small">Hyperliquid only returns your latest 10,000 fills, so the real number is higher.</p>' : ""}`));
+
+    const top = hl.coins.slice(0,5), max = top[0].vol;
+    out.push(slide(PALETTE[2], `
+      <div class="eyebrow">Your coins</div>
+      <div class="line">Your #1 was <b style="color:var(--accent)">${top[0].coin}</b>.<br>${pct(top[0].vol/hl.volume)} of everything you traded.</div>
+      <div class="coinbars">${top.map((c,i) => `
+        <div class="cb"><div class="n">0${i+1}</div><div class="t"><div>${c.coin}</div><i style="width:${Math.max(4, c.vol/max*100)}%;animation-delay:${i*0.08}s"></i></div><div class="v">${usd(c.vol)}</div></div>`).join("")}
+      </div>`));
+
+    const L = Math.round(hl.longShare*100), S = 100 - L;
+    out.push(slide(PALETTE[3], `
+      <div class="eyebrow">Long or short</div>
+      <div class="big">${L >= 50 ? L + "%" : S + "%"}</div>
+      <div class="line">of your opens were ${L >= 50 ? "longs" : "shorts"}.</div>
+      <div class="split"><div style="width:${Math.max(L,12)}%;background:var(--lime)">LONG ${L}%</div><div style="width:${Math.max(S,12)}%;background:var(--pink)">SHORT ${S}%</div></div>
+      <p class="small">${L >= 70 ? "You only ever expected one direction." : L <= 30 ? "You spent the year betting against everyone." : "Fairly balanced. You traded the chart, not your feelings."}</p>`));
+
+    if (hl.best || hl.worst){
+      out.push(slide(PALETTE[0], `
+        <div class="eyebrow">The highlight reel</div>
+        <div class="line">Your best and worst moments.</div>
+        ${hl.best ? `<div class="trade"><div class="k">Best close</div><div class="p pos">${usd(hl.best.pnl,true)}</div><div class="d">${hl.best.coin} · ${hl.best.dir.replace("Close ","closing ").toLowerCase()} · ${new Date(hl.best.time).toLocaleDateString("en-US",{month:"short",day:"numeric"})}</div></div>` : ""}
+        ${hl.worst ? `<div class="trade"><div class="k">Worst close</div><div class="p neg">${usd(hl.worst.pnl,true)}</div><div class="d">${hl.worst.coin} · ${hl.worst.dir.replace("Close ","closing ").toLowerCase()} · ${new Date(hl.worst.time).toLocaleDateString("en-US",{month:"short",day:"numeric"})}</div></div>` : ""}
+        ${hl.liqs ? `<p class="small">And ${hl.liqs} liquidation${hl.liqs>1?"s":""}. We won't dwell on it.</p>` : ""}`));
+    }
+
+    out.push(slide(hl.net >= 0 ? PALETTE[0] : PALETTE[2], `
+      <div class="eyebrow">The bottom line</div>
+      <div class="line">Net realized PnL after fees and funding</div>
+      <div class="big ${hl.net >= 0 ? "" : "neg"}">${usd(hl.net,true)}</div>
+      ${sparkSVG(hl.curve)}
+      <div class="stats">
+        <div class="stat"><b>${pct(hl.winRate)}</b><span>win rate on closes</span></div>
+        <div class="stat"><b>${usd(hl.fundingNet,true)}</b><span>funding ${hl.fundingNet >= 0 ? "earned" : "paid"}</span></div>
+      </div>`));
+
+    const mx = Math.max(...hl.hours);
+    out.push(slide(PALETTE[4], `
+      <div class="eyebrow">When you trade</div>
+      <div class="line">Your favorite hour was</div>
+      <div class="big">${hourLabel(hl.peakHour)}</div>
+      <div class="clock">${hl.hours.map((h,i) => `<i class="${i===hl.peakHour?"hot":""}" style="height:${Math.max(3,h/mx*100)}%"></i>`).join("")}</div>
+      <div class="clocklbl"><span>12am</span><span>6am</span><span>12pm</span><span>6pm</span><span>11pm</span></div>
+      <p class="small">Your busiest month was <b style="color:var(--fg)">${MONTHS[hl.peakMonth]}</b>.${hl.nightShare > 0.2 ? ` ${pct(hl.nightShare)} of your trades happened after midnight.` : ""}</p>`));
+  }
+
+  if (pm){
+    out.push(slide(PALETTE[1], `
+      <div class="eyebrow">Polymarket</div>
+      <div class="line">You had opinions on</div>
+      <div class="big">${pm.markets}</div>
+      <div class="line">markets.</div>
+      <div class="stats">
+        <div class="stat"><b>${usd(pm.wagered)}</b><span>wagered</span></div>
+        <div class="stat"><b class="${pm.realized>=0?"pos":"neg"}">${usd(pm.realized,true)}</b><span>realized PnL</span></div>
+        ${pm.resolved ? `<div class="stat"><b>${pct(pm.hitRate)}</b><span>of closed positions won</span></div>` : ""}
+        <div class="stat"><b>${pm.trades}</b><span>trades</span></div>
+      </div>`));
+    if (pm.best || pm.longshot || pm.biggestBet){
+      out.push(slide(PALETTE[3], `
+        <div class="eyebrow">Your calls</div>
+        ${pm.best ? `<div class="trade"><div class="k">Best call</div><div class="p pos">${usd(pm.best.pnl,true)}</div><div class="d">${trim(pm.best.title,70)}${pm.best.outcome ? " · " + pm.best.outcome : ""}</div></div>` : ""}
+        ${pm.longshot && pm.longshot !== pm.best ? `<div class="trade"><div class="k">Longest odds you hit</div><div class="p pos">${Math.round(pm.longshot.avgPrice*100)}¢</div><div class="d">${trim(pm.longshot.title,70)}</div></div>` : ""}
+        ${pm.worst ? `<div class="trade"><div class="k">The one that hurt</div><div class="p neg">${usd(pm.worst.pnl,true)}</div><div class="d">${trim(pm.worst.title,70)}</div></div>` : ""}`));
+    }
+  }
+
+  const [pName, pLine] = persona(hl, pm);
+  out.push(slide(PALETTE[2], `
+    <div class="eyebrow">Your 2026 trader type</div>
+    <div class="persona">${pName}</div>
+    <p class="line" style="margin-top:20px;font-size:22px">${pLine}</p>`));
+
+  out.push(slide(PALETTE[0], `
+    <div id="cardWrap"><canvas id="card" width="1080" height="1350"></canvas></div>
+    <div class="actions">
+      <button class="btn" id="dlBtn">Download image</button>
+      <button class="btn ghost" id="copyBtn">Copy image</button>
+      <button class="btn ghost" id="xBtn">Post on X</button>
+      <button class="btn ghost" id="againBtn">Try another wallet</button>
+    </div>
+    <div class="note" id="note"></div>`));
+
+  state = { hl, pm, persona: [pName, pLine], who: short, isDemo };
+  return out;
+}
+
+function sparkSVG(curve){
+  if (!curve || curve.length < 2) return "";
+  const w = 500, h = 110, xs = curve.map(c=>c[0]), ys = curve.map(c=>c[1]);
+  const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(0,...ys), y1 = Math.max(0,...ys);
+  const X = x => (x - x0) / (x1 - x0 || 1) * w, Y = y => h - (y - y0) / (y1 - y0 || 1) * h;
+  const d = curve.map((c,i) => (i ? "L" : "M") + X(c[0]).toFixed(1) + " " + Y(c[1]).toFixed(1)).join(" ");
+  const col = ys[ys.length-1] >= 0 ? "var(--lime)" : "var(--pink)";
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <line x1="0" x2="${w}" y1="${Y(0)}" y2="${Y(0)}" stroke="#ffffff30" stroke-dasharray="4 6"/>
+    <path d="${d}" fill="none" stroke="${col}" stroke-width="3" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>`;
+}
+
+function renderStory(){
+  $("slides").innerHTML = slides.map((s,i) => `<div class="slide" data-i="${i}">${s.html}</div>`).join("");
+  $("bars").innerHTML = slides.map(() => "<span><i></i></span>").join("");
+  $("story").style.display = "block";
+  document.body.style.overflow = "hidden";
+  go(0);
+}
+
+function go(i){
+  if (i < 0) i = 0;
+  if (i >= slides.length) i = slides.length - 1;
+  idx = i;
+  document.querySelectorAll(".slide").forEach(el => el.classList.toggle("on", +el.dataset.i === i));
+  [...$("bars").children].forEach((b,k) => { b.className = k < i ? "done" : k === i ? "on" : ""; b.firstChild.style.animation = "none"; b.firstChild.offsetWidth; b.firstChild.style.animation = ""; });
+  document.documentElement.style.setProperty("--accent", slides[i].accent);
+  $("glow").style.background = slides[i].accent;
+  clearTimeout(timer);
+  const last = i === slides.length - 1;
+  $("tapR").style.display = last ? "none" : "";
+  $("tapL").style.width = last ? "0" : "";
+  if (last){ $("bars").lastChild.className = "done"; drawCard(); wireCardButtons(); }
+  else timer = setTimeout(() => go(idx + 1), 6000);
+}
+
+/* ---------- share card (canvas) ---------- */
+function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+
+async function drawCard(){
+  const c = $("card"); if (!c) return; const ctx = c.getContext("2d");
+  try { await document.fonts.ready; } catch(e){}
+  const { hl, pm, persona: [pName], who } = state;
+  const W = 1080, H = 1350;
+  ctx.fillStyle = "#07070a"; ctx.fillRect(0,0,W,H);
+  const g = ctx.createRadialGradient(W*0.8, H*0.15, 0, W*0.8, H*0.15, 900);
+  g.addColorStop(0,"rgba(198,255,61,.30)"); g.addColorStop(1,"rgba(198,255,61,0)");
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+  const g2 = ctx.createRadialGradient(W*0.1, H*0.95, 0, W*0.1, H*0.95, 800);
+  g2.addColorStop(0,"rgba(155,123,255,.28)"); g2.addColorStop(1,"rgba(155,123,255,0)");
+  ctx.fillStyle = g2; ctx.fillRect(0,0,W,H);
+
+  const P = 84;
+  ctx.fillStyle = "#c6ff3d"; ctx.font = "700 30px 'JetBrains Mono', monospace";
+  ctx.fillText("ONCHAIN WRAPPED · 2026", P, P + 30);
+  ctx.fillStyle = "#8a8794"; ctx.font = "400 28px 'JetBrains Mono', monospace";
+  ctx.fillText(who, P, P + 76);
+
+  ctx.fillStyle = "#8a8794"; ctx.font = "500 34px 'Space Grotesk', sans-serif";
+  ctx.fillText("Trader type", P, 300);
+  ctx.fillStyle = "#c6ff3d"; let fs = 120; ctx.font = `700 ${fs}px 'Space Grotesk', sans-serif`;
+  while (ctx.measureText(pName).width > W - 2*P && fs > 60){ fs -= 4; ctx.font = `700 ${fs}px 'Space Grotesk', sans-serif`; }
+  ctx.fillText(pName, P - 4, 300 + fs);
+
+  const tiles = [];
+  if (hl){
+    tiles.push(["HL volume", usd(hl.volume), "#f4f1ea"]);
+    tiles.push(["Net PnL", usd(hl.net,true), hl.net >= 0 ? "#c6ff3d" : "#ff4fa3"]);
+    tiles.push(["Win rate", pct(hl.winRate), "#f4f1ea"]);
+    tiles.push(["Top coin", hl.coins[0].coin, "#3de0ff"]);
+    if (hl.best) tiles.push(["Best trade", usd(hl.best.pnl,true), "#c6ff3d"]);
+    tiles.push(["Fav hour", hourLabel(hl.peakHour), "#f4f1ea"]);
+  }
+  if (pm){
+    tiles.push(["Markets called", String(pm.markets), "#f4f1ea"]);
+    tiles.push(["Polymarket PnL", usd(pm.realized,true), pm.realized >= 0 ? "#c6ff3d" : "#ff4fa3"]);
+  }
+  const show = tiles.slice(0, 6);
+  const top = 300 + fs + 90, gap = 24, tw = (W - 2*P - gap) / 2, th = 170;
+  show.forEach((t,i) => {
+    const x = P + (i%2)*(tw+gap), y = top + Math.floor(i/2)*(th+gap);
+    ctx.fillStyle = "rgba(255,255,255,.05)"; rrect(ctx,x,y,tw,th,24); ctx.fill();
+    ctx.strokeStyle = "rgba(255,255,255,.10)"; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = "#8a8794"; ctx.font = "500 28px 'Space Grotesk', sans-serif"; ctx.fillText(t[0], x+32, y+52);
+    ctx.fillStyle = t[2]; let f2 = 64; ctx.font = `700 ${f2}px 'Space Grotesk', sans-serif`;
+    while (ctx.measureText(t[1]).width > tw - 64 && f2 > 30){ f2 -= 4; ctx.font = `700 ${f2}px 'Space Grotesk', sans-serif`; }
+    ctx.fillText(t[1], x+32, y+130);
+  });
+
+  // Polymarket strip under the tiles when both sources exist
+  if (hl && pm){
+    const y = top + Math.ceil(show.length/2)*(th+gap) + 20;
+    ctx.fillStyle = "#8a8794"; ctx.font = "500 28px 'Space Grotesk', sans-serif";
+    ctx.fillText("Polymarket", P, y + 10);
+    ctx.fillStyle = "#f4f1ea"; ctx.font = "700 44px 'Space Grotesk', sans-serif";
+    const txt = `${pm.markets} markets · ${usd(pm.wagered)} wagered · `;
+    ctx.fillText(txt, P, y + 70);
+    ctx.fillStyle = pm.realized >= 0 ? "#c6ff3d" : "#ff4fa3";
+    ctx.fillText(usd(pm.realized,true), P + ctx.measureText(txt).width, y + 70);
+  }
+
+  ctx.fillStyle = "#8a8794"; ctx.font = "400 26px 'JetBrains Mono', monospace";
+  const host = (location.host && !/claudeusercontent|claude\.ai|^$/.test(location.host))
+    ? (location.host + location.pathname.replace(/index\.html$/, "").replace(/\/$/, "")).replace(/^www\./, "")
+    : "onchain wrapped";
+  ctx.fillText("get yours → " + host, P, H - P);
+  if (state.isDemo){ ctx.textAlign = "right"; ctx.fillText("demo data", W - P, H - P); ctx.textAlign = "left"; }
+}
+
+function cardBlob(){ return new Promise(res => $("card").toBlob(res, "image/png")); }
+function note(t){ const n = $("note"); if (n){ n.textContent = t; setTimeout(() => { if (n.textContent === t) n.textContent = ""; }, 3500); } }
+
+function wireCardButtons(){
+  $("dlBtn").onclick = async e => { e.stopPropagation();
+    const b = await cardBlob(); const a = document.createElement("a");
+    a.href = URL.createObjectURL(b); a.download = "onchain-wrapped-2026.png"; document.body.appendChild(a); a.click(); a.remove();
+    note("Saved. If nothing downloaded, long-press the image to save it.");
+  };
+  $("copyBtn").onclick = async e => { e.stopPropagation();
+    try { const b = await cardBlob(); await navigator.clipboard.write([new ClipboardItem({"image/png": b})]); note("Copied. Paste it into your post."); }
+    catch(err){ note("Your browser blocked copying. Use Download instead."); }
+  };
+  $("xBtn").onclick = e => { e.stopPropagation();
+    const { hl, persona:[pName] } = state;
+    const bits = [`My 2026 onchain, wrapped: ${pName}.`];
+    if (hl) bits.push(`${usd(hl.volume)} traded on Hyperliquid, ${pct(hl.winRate)} win rate.`);
+    bits.push("Get yours:");
+    const url = location.origin && location.protocol.startsWith("http") ? location.origin + location.pathname : "";
+    const href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(bits.join(" ")) + (url ? "&url=" + encodeURIComponent(url) : "");
+    const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener"; document.body.appendChild(a); a.click(); a.remove();
+    note("Attach the downloaded image to your post.");
+  };
+  $("againBtn").onclick = e => { e.stopPropagation(); closeStory(); };
+}
+
+function closeStory(){
+  clearTimeout(timer);
+  $("story").style.display = "none"; document.body.style.overflow = "";
+}
+
+/* ---------- controls ---------- */
+$("tapR").onclick = () => go(idx + 1);
+$("tapL").onclick = () => go(idx - 1);
+$("closeBtn").onclick = closeStory;
+document.addEventListener("keydown", e => {
+  if ($("story").style.display !== "block") return;
+  if (e.key === "ArrowRight" || e.key === " ") go(idx + 1);
+  if (e.key === "ArrowLeft") go(idx - 1);
+  if (e.key === "Escape") closeStory();
+});
+let holdT;
+$("story").addEventListener("pointerdown", () => { holdT = Date.now(); $("story").classList.add("paused"); });
+$("story").addEventListener("pointerup", () => { $("story").classList.remove("paused"); });
+
+$("pmToggle").onclick = () => { $("pmField").style.display = "block"; $("pmToggle").style.display = "none"; };
+
+function loading(on, msg){ $("loading").style.display = on ? "flex" : "none"; if (msg) $("loadMsg").textContent = msg; }
+
+$("demoBtn").onclick = () => {
+  const d = demoData();
+  slides = buildSlides(computeHL(d.fills, d.funding), computePM(d.activity, d.closed, d.open), "", true);
+  $("demoBadge").style.display = "block";
+  renderStory();
+};
+
+$("form").onsubmit = async e => {
+  e.preventDefault();
+  $("err").textContent = "";
+  const hlAddr = $("hl").value.trim().toLowerCase();
+  const pmAddr = ($("pm").value.trim() || hlAddr).toLowerCase();
+  const ok = a => /^0x[0-9a-f]{40}$/.test(a);
+  if (!ok(hlAddr)) { $("err").textContent = "That doesn't look like a wallet address. It should start with 0x and be 42 characters."; return; }
+  if (!ok(pmAddr)) { $("err").textContent = "The Polymarket address doesn't look right."; return; }
+
+  loading(true, "Pulling your Hyperliquid fills…");
+  let hl = null, pm = null, hlErr = null, pmErr = null;
+  try {
+    const [fills, funding] = await Promise.all([
+      fetchHLFills(hlAddr, n => loading(true, `Pulled ${n.toLocaleString()} fills…`)),
+      fetchHLFunding(hlAddr).catch(() => [])
+    ]);
+    hl = computeHL(fills, funding);
+  } catch(err){ hlErr = err; }
+  loading(true, "Checking Polymarket…");
+  try { const p = await fetchPM(pmAddr); pm = computePM(p.activity, p.closed, p.open); } catch(err){ pmErr = err; }
+  loading(false);
+
+  if (!hl && !pm){
+    $("err").textContent = (hlErr && pmErr)
+      ? "Couldn't reach the Hyperliquid or Polymarket APIs. Check your connection and try again."
+      : "No 2026 activity found for this address on Hyperliquid or Polymarket.";
+    return;
+  }
+  try { history.replaceState(null, "", location.pathname + "?w=" + hlAddr); } catch(e){}
+  $("demoBadge").style.display = "none";
+  slides = buildSlides(hl, pm, hlAddr, false);
+  renderStory();
+};
+
+// prefill from ?w=0x…
+try { const w = new URLSearchParams(location.search).get("w"); if (w) $("hl").value = w; } catch(e){}
+</script>
+</body>
+</html>
