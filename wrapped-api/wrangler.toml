@@ -8,4 +8,4 @@ ALLOWED_ORIGINS = "https://apurvacrypto.xyz,https://www.apurvacrypto.xyz"
 
 [[kv_namespaces]]
 binding = "KV"
-id = "REPLACE_WITH_KV_ID"
+id = "512005c9a6eb4bfb88758d604de3c2f2"
